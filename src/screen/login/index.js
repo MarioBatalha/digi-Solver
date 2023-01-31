@@ -14,7 +14,10 @@ const LogIng = ({ navigation }) => {
   return (
     <View style={styles.login}>
       <Image source={Logo} style={styles.logoImg} />
-      <Text style={styles.loginTitle}>Log in</Text>
+      <Text style={styles.title}>Bem-vindo de volta!</Text>
+      <Text style={styles.subtitle}>
+        Entre e peça novos exames ou receitas.
+      </Text>
       <View style={styles.loginContainer}>
         <TextInput
           textContentType="emailAddress"
@@ -22,21 +25,24 @@ const LogIng = ({ navigation }) => {
           style={styles.input}
         />
         <TextInput
+          secureTextEntry
           textContentType="password"
           placeholder="Palavra-passe"
           style={styles.input}
         />
-        <ButtonComponent
-          title="Entrar"
-          onPress={() => alert("Profile")}
-        />
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate("Profile")}
+        >
+          <Text style={styles.touchableValue}>Entrar</Text>
+        </TouchableOpacity>
         <View style={styles.noAccount}>
-            <TouchableOpacity
-              style={styles.createAccount}
-              onPress={() => navigation.navigate("Register")}
-            >
-              <Text>Não tem conta? Criar uma.</Text>
-            </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.createAccount}
+            onPress={() => navigation.navigate("Register")}
+          >
+            <Text style={styles.subtitle}>Não tem uma conta? Criar uma.</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </View>
@@ -49,11 +55,12 @@ const styles = StyleSheet.create({
   input: {
     padding: 15,
     margin: 10,
-    border: "1px solid black",
+    borderColor: "#FFF",
+    borderWidth: 3,
     borderRadius: "5px",
     color: "#05445E",
     backgroundColor: "#FFF",
-    width: 380,
+    width: 390,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -71,13 +78,31 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "column",
     width: "100%",
-    justifyContent: "center",
-    alignItems: "center",
+    height: "97%",
+    padding: 10,
     backgroundColor: "#FFF",
   },
 
   loginContainer: {
-    marginTop: 30,
+    display: "flex",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    flexDirection: "column",
+    width: "100%",
+    height: "71%",
+    marginTop: 50,
+    padding: 30,
+    borderRadius: "30px",
+    backgroundColor: "#189AB4",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+
+    elevation: 3,
   },
 
   logoImg: {
@@ -85,10 +110,18 @@ const styles = StyleSheet.create({
     width: 200,
     height: 100,
   },
-  loginTitle: {
-    fontSize: 40,
+
+  title: {
+    textAlign: "left",
+    fontFamily: "Inter-SemiBoldItalic",
+    fontSize: 30,
     fontWeight: "bold",
     color: "#05445E",
+  },
+
+  subtitle: {
+    fontSize: 15,
+    margin: 2,
   },
 
   noAccount: {
@@ -96,8 +129,25 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+
   createAccount: {
     justifyContent: "center",
     alignItems: "center",
+  },
+
+  button: {
+    padding: 13,
+    margin: 5,
+    width: 390,
+    borderRadius: "5px",
+    color: "#FFF",
+    backgroundColor: "#05445E",
+  },
+
+  touchableValue: {
+    fontSize: 20,
+    fontWeight: "bold",
+    textAlign: "center",
+    color: "#FFF",
   },
 });

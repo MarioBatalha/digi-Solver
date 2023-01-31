@@ -26,13 +26,13 @@ const Home = ({ navigation }) => {
     <View style={styles.container}>
       <View style={styles.homeContainer}>
         <Text style={styles.title}>Testes no cubico</Text>
-        <Text>Porque a sua saúde começa em casa, Levamos até si.</Text>
+        <Text style={styles.subtitle}>Porque a sua saúde começa em casa, Levamos até si.</Text>
         <View style={styles.imageContainer}>
           <Image source={Doctor} style={styles.firstImage} />
           <Image source={DoctorSpecialist} style={styles.secondImage} />
         </View>
         <View style={styles.startContainer}>
-          <TouchableOpacity style={styles.icon} onPress={() => navigation.navigate('Login')}>
+          <TouchableOpacity style={styles.icon} onPress={() => navigation.navigate('Profile')}>
             <Text>
               <AntDesign name="arrowright" size={30} color="white" />
             </Text>
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
   },
 
   subtitle: {
-    fontSize: 20,
+    fontSize: 15,
   },
 
   imageContainer: {
