@@ -1,0 +1,13 @@
+{
+    "colors": {
+      "backgroundColor": "#F2F2F2",
+      "textColor": "#05445E",
+      "primary": "#D4F1F4",
+      "secondary": "#000",
+      "transparent": "#FFFFFF00",
+      "inputBorder": "#C6C6C6",
+      "pinColor": "#EA4335",
+      "muted": "#189AB4"
+    },
+    "Dark": {}
+  }
