@@ -1,3 +1,4 @@
+import {  useState } from 'react';
 import {
   View,
   TextInput,
@@ -7,10 +8,11 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-import ButtonComponent from "../../components/Button";
 import Logo from "../../assets/img/digisolve-logo.png";
 
 const LogIng = ({ navigation }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   return (
     <View style={styles.login}>
       <Image source={Logo} style={styles.logoImg} />
@@ -20,14 +22,19 @@ const LogIng = ({ navigation }) => {
       </Text>
       <View style={styles.loginContainer}>
         <TextInput
-          textContentType="emailAddress"
-          placeholder="email"
+           placeholder="Email"
+           value={email}
+           onChangeText={(text) => setEmail(text)}
+           keyboardType="email-address"
           style={styles.input}
         />
         <TextInput
+          placeholder="Password"
+          value={password}
+          onChangeText={(text) => setPassword(text)}
+          keyboardType="visible-password"
           secureTextEntry
-          textContentType="password"
-          placeholder="Palavra-passe"
+          onSubmitEditing={() => alert("Welcome to GeeksforGeeks")}
           style={styles.input}
         />
         <TouchableOpacity
