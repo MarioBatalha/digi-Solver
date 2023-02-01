@@ -1,11 +1,11 @@
 import { View, Text, StyleSheet } from 'react-native';
 
-const Consult = ({navigation}) => {
+const ColonExam = ({navigation}) => {
     return (
         <View>
-            <Text>Consult screen</Text>
+            <Text> user settings</Text>
         </View>
     )
 }
 
-export default Consult;
+export default ColonExam;

@@ -1,11 +1,11 @@
 import { View, Text, StyleSheet } from 'react-native';
 
-const Consult = ({navigation}) => {
+const BloodExam = ({navigation}) => {
     return (
         <View>
-            <Text>Consult screen</Text>
+            <Text>Blood exame screen</Text>
         </View>
     )
 }
 
-export default Consult;
+export default BloodExam;

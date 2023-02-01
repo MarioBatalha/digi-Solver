@@ -32,14 +32,14 @@ const LogIng = ({ navigation }) => {
         />
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate("Profile")}
+          onPress={() => navigation.navigate("Principal")}
         >
           <Text style={styles.touchableValue}>Entrar</Text>
         </TouchableOpacity>
         <View style={styles.noAccount}>
           <TouchableOpacity
             style={styles.createAccount}
-            onPress={() => navigation.navigate("Register")}
+            onPress={() => navigation.navigate("Registrar")}
           >
             <Text style={styles.subtitle}>Não tem uma conta? Criar uma.</Text>
           </TouchableOpacity>

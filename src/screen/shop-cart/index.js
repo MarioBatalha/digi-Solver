@@ -1,11 +1,11 @@
 import { View, Text, StyleSheet } from 'react-native';
 
-const Consult = ({navigation}) => {
+const ShopCart = ({navigation}) => {
     return (
         <View>
-            <Text>Consult screen</Text>
+            <Text> Shop Cart consult</Text>
         </View>
     )
 }
 
-export default Consult;
+export default ShopCart;
