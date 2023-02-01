@@ -23,6 +23,7 @@ const Prescription = ({ navigation }) => {
 
   const  handleSaveImage = () => {
     Alert.alert('Receita salva com sucesso');
+    navigation.navigate("Home")
   }
 
   return (

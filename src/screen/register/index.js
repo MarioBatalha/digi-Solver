@@ -19,19 +19,47 @@ const LogIng = ({ navigation }) => {
         Crie uma conta e explore das nossas soluções.
       </Text>
       <View style={styles.loginContainer}>
-        <TextInput
-          textContentType="emailAddress"
-          placeholder="Nome do usuário"
+      <TextInput
+           placeholder="Nome completo"
           style={styles.input}
         />
         <TextInput
-          textContentType="emailAddress"
-          placeholder="Email"
+           placeholder="Email"
+           keyboardType="name"
           style={styles.input}
         />
         <TextInput
-          textContentType="password"
-          placeholder="Palavra-passe"
+         maxLength={15}
+          placeholder="Password"
+          keyboardType="visible-password"
+          secureTextEntry
+          style={styles.input}
+        />
+        <View style={styles.inputGroup}>
+        <TextInput
+           placeholder="Peso"
+           keyboardType="numeric"
+          style={styles.inputItems}
+        />
+         <TextInput
+           placeholder="Altura"
+           keyboardType="numeric"
+          style={styles.inputItems}
+        />
+         <TextInput
+           placeholder="Idade"
+           keyboardType="numeric"
+          style={styles.inputItems}
+        />
+        </View>
+        <TextInput
+           placeholder="Telefone"
+           keyboardType="numeric"
+          style={styles.input}
+        />
+        <TextInput
+         multiline
+           placeholder="É alergico a alguma substância"
           style={styles.input}
         />
         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Profile")}>
@@ -40,7 +68,7 @@ const LogIng = ({ navigation }) => {
         <View style={styles.noAccount}>
           <TouchableOpacity
             style={styles.createAccount}
-            onPress={() => navigation.navigate("Login")}
+            onPress={() => navigation.navigate("Log in")}
           >
             <Text style={styles.subtitle}>Já tenho uma conta? Entre.</Text>
           </TouchableOpacity>
@@ -55,7 +83,7 @@ export default LogIng;
 const styles = StyleSheet.create({
   input: {
     padding: 15,
-    margin: 10,
+    margin: 5,
     borderColor: '#FFF',
     borderWidth: 3,
     borderRadius: "5px",
@@ -145,8 +173,37 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+
   createAccount: {
     justifyContent: "center",
     alignItems: "center",
   },
+
+  inputGroup: {
+    display: "flex",
+    flexDirection: "row",
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  inputItems: {
+    padding: 15,
+    margin: 5,
+    borderColor: '#FFF',
+    borderWidth: 3,
+    borderRadius: "5px",
+    color: "#05445E",
+    backgroundColor: "#FFF",
+    width: 123,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
+
+    elevation: 2,
+  }
 });
