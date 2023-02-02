@@ -133,16 +133,16 @@ const Home = ({ navigation }) => {
         </ScrollView>
         <View style={styles.menuContainer}>
           <TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate('Home')}>
-          <FontAwesome name="home" size={35} color="#606060" />
+          <FontAwesome name="home" size={35} color="#7D7D86" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate('Notificações')}>
-          <FontAwesome name="bell" size={35} color="#606060" />
+          <FontAwesome name="bell" size={35} color="#7D7D86" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate('Carrinho')}>
-          <FontAwesome name="shopping-cart" size={35} color="#606060" />
+          <FontAwesome name="shopping-cart" size={35} color="#7D7D86" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate('Log in')}>
-          <Ionicons name="ios-person-circle-outline" size={35} color="#606060" />
+          <Ionicons name="ios-person-circle-outline" size={35} color="#7D7D86" />
           </TouchableOpacity>
         </View>
       </View>

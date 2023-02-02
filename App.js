@@ -1,3 +1,5 @@
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -13,28 +15,15 @@ import Profile from "./src/screen/profile";
 import ShopCart from "./src/screen/shop-cart";
 import Consult from "./src/screen/consult";
 import Notification from "./src/screen/notification";
-import Menu from "./src/components/Menu";
+
+import Routes from "./src/routes";
 
 const Stack = createNativeStackNavigator();
 
 const App = ({ navigation }) => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Principal">
-        <Stack.Screen name="Principal" component={Main} />
-        <Stack.Screen name="Log in" component={LogIn} />
-        <Stack.Screen name="Consultas" component={Consult} />
-        <Stack.Screen name="Exame do colón" component={ColonExam} />
-        <Stack.Screen name="Exames de sangue" component={BloodExam} />
-        <Stack.Screen name="Teste de grávidez" component={PregnancyTest} />
-        <Stack.Screen name="Nova receita" component={Prescription} />
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Registrar" component={Register} />
-        <Stack.Screen name="Carrinho" component={ShopCart} />
-        <Stack.Screen name="Perfil" component={Profile} />
-        <Stack.Screen name="Notificações" component={Notification} />
-        <Stack.Screen name="Menu" component={Menu} />
-      </Stack.Navigator>
+      <Routes />
     </NavigationContainer>
   );
 };

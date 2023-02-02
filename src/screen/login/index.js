@@ -10,7 +10,7 @@ import {
 
 import Logo from "../../assets/img/digisolve-logo.png";
 
-const LogIng = ({ navigation }) => {
+const LogIn = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   return (
@@ -56,7 +56,7 @@ const LogIng = ({ navigation }) => {
   );
 };
 
-export default LogIng;
+export default LogIn;
 
 const styles = StyleSheet.create({
   input: {

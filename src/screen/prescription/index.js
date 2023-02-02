@@ -30,7 +30,7 @@ const Prescription = ({ navigation }) => {
     <View style={styles.container}>
       <Button title="Adicionar receita" onPress={pickImage} />
       {image && (
-        <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
+        <Image source={{ uri: image }} style={{ width: 400, height: 650 }} />
       )}
       {image && (<TouchableOpacity style={styles.button} onPress={handleSaveImage}>
         <Text style={styles.touchableValue}>Salvar</Text>
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   button: {
     padding: 13,
     margin: 5,
-    width: 390,
+    width: 400,
     borderRadius: "5px",
     color: "#FFF",
     backgroundColor: "#05445E",
