@@ -1,4 +1,4 @@
-import {  useState } from 'react';
+import {  useState, useContext } from 'react';
 import {
   View,
   TextInput,
@@ -9,10 +9,22 @@ import {
 } from "react-native";
 
 import Logo from "../../assets/img/digisolve-logo.png";
+import { logIn }  from "../../services/auth";
+import AuthContext from '../../contexts/auth';
 
 const LogIn = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const { loggedIn } = useContext(AuthContext);
+  
+  console.log(loggedIn);
+
+  const handleLogIn = async () => {
+    const response = await logIn();
+    
+    console.log(response);
+  }
   return (
     <View style={styles.login}>
       <Image source={Logo} style={styles.logoImg} />
@@ -39,7 +51,7 @@ const LogIn = ({ navigation }) => {
         />
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate("Principal")}
+          onPress={handleLogIn}
         >
           <Text style={styles.touchableValue}>Entrar</Text>
         </TouchableOpacity>

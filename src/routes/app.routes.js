@@ -1,16 +1,16 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import Main from "../screen/main";
-import Home from "../screen/home";
-import PregnancyTest from "../screen/pregnancy-test";
-import Prescription from "../screen/prescription";
-import BloodExam from "../screen/blood-exam";
-import ColonExam from "../screen/colon-exam";
-import Profile from "../screen/profile";
-import ShopCart from "../screen/shop-cart";
-import Consult from "../screen/consult";
-import Notification from "../screen/notification";
+import Main from "../screens/main";
+import Home from "../screens/home";
+import PregnancyTest from "../screens/pregnancy-test";
+import Prescription from "../screens/prescription";
+import BloodExam from "../screens/blood-exam";
+import ColonExam from "../screens/colon-exam";
+import Profile from "../screens/profile";
+import ShopCart from "../screens/shop-cart";
+import Consult from "../screens/consult";
+import Notification from "../screens/notification";
 
 const AppStack = createNativeStackNavigator();
 
