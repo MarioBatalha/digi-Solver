@@ -31,9 +31,13 @@ const SignIn = ({ navigation }) => {
       console.table(user)
     })
     .catch((error) => {
+      if (error.code === 'auth/invalid-email') {
+        Alert.alert('Endereço inválido');
+      }
+      Alert.alert(error);
+    });
       console.log(error)
       Alert.alert(err)
-    })
   }
 
   return (

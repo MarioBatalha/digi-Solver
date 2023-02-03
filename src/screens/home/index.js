@@ -141,7 +141,7 @@ const Home = ({ navigation }) => {
           <TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate('Carrinho')}>
           <FontAwesome name="shopping-cart" size={35} color="#7D7D86" />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate('Log in')}>
+          <TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate('Sign in')}>
           <Ionicons name="ios-person-circle-outline" size={35} color="#7D7D86" />
           </TouchableOpacity>
         </View>

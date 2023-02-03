@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 import {
   View,
   TextInput,
@@ -6,12 +6,13 @@ import {
   Image,
   Text,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 
 import Logo from "../../assets/img/digisolve-logo.png";
-import{ getAuth, createUserEmailAndPassword } from 'firebase/auth';
-import { initializeApp } from 'firebase/app';
-import { firebaseConfig } from './../../../firebase.config';
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { initializeApp } from "firebase/app";
+import { firebaseConfig } from "./../../../firebase.config";
 
 const SignIn = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -21,17 +22,22 @@ const SignIn = ({ navigation }) => {
   const auth = getAuth(app);
 
   const handleCreateAccount = () => {
-    createUserEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      Alert.alert('conta criada com sucesso')
-      const user = userCredential.user;
-      navigation.navigate('Log in')
+    createUserWithEmailAndPassword(auth, email, password)
+    .then(() => {
+      Alert.alert('conta criada com sucesso');
+      navigation.navigate('Home')
     })
-    .catch(err => {
-      console.log(err)
-      Alert.alert(err)
-    })
-  }
+    .catch(error => {
+      if (error.code === 'auth/email-already-in-use') {
+        Alert.alert('email já está registrado');
+      }
+  
+      if (error.code === 'auth/invalid-email') {
+        Alert.alert('Endereço inválido');
+      }
+      Alert.alert(error);
+    });
+  };
   return (
     <View style={styles.login}>
       <Image source={Logo} style={styles.logoImg} />
@@ -40,49 +46,52 @@ const SignIn = ({ navigation }) => {
         Crie uma conta e explore das nossas soluções.
       </Text>
       <View style={styles.loginContainer}>
-      <TextInput
-           placeholder="Nome completo"
-          style={styles.input}
-        />
+        <TextInput placeholder="Nome completo" style={styles.input} />
         <TextInput
-           placeholder="Email"
-           keyboardType="name"
+          placeholder="Email"
+          keyboardType="name"
+          value={email}
           style={styles.input}
           onChangeText={(text) => setEmail(text)}
         />
         <TextInput
-         maxLength={15}
+          maxLength={15}
           placeholder="Password"
+          value={password}
           keyboardType="visible-password"
-          onChange={(text) => setPassword(text)}
+          onChangeText={(text) => setPassword(text)}
           secureTextEntry
           style={styles.input}
         />
         <View style={styles.inputGroup}>
-        <TextInput
-           placeholder="Peso"
-           keyboardType="numeric"
-          style={styles.inputItems}
-        />
-         <TextInput
-           placeholder="Altura"
-           keyboardType="numeric"
-          style={styles.inputItems}
-        />
-         <TextInput
-           placeholder="Idade"
-           keyboardType="numeric"
-          style={styles.inputItems}
-        />
+          <TextInput
+            maxLength={4}
+            placeholder="Peso"
+            keyboardType="numeric"
+            style={styles.inputItems}
+          />
+          <TextInput
+            maxLength={4}
+            placeholder="Altura"
+            keyboardType="numeric"
+            style={styles.inputItems}
+          />
+          <TextInput
+            maxLength={3}
+            placeholder="Idade"
+            keyboardType="numeric"
+            style={styles.inputItems}
+          />
         </View>
         <TextInput
-           placeholder="Telefone"
-           keyboardType="numeric"
+          maxLength={12}
+          placeholder="Telefone"
+          keyboardType="numeric"
           style={styles.input}
         />
         <TextInput
-         multiline
-           placeholder="É alergico a alguma substância"
+          multiline
+          placeholder="É alergico a alguma substância"
           style={styles.input}
         />
         <TouchableOpacity style={styles.button} onPress={handleCreateAccount}>
@@ -107,7 +116,7 @@ const styles = StyleSheet.create({
   input: {
     padding: 15,
     margin: 5,
-    borderColor: '#FFF',
+    borderColor: "#FFF",
     borderWidth: 3,
     borderRadius: "5px",
     color: "#05445E",
@@ -128,16 +137,16 @@ const styles = StyleSheet.create({
     padding: 13,
     margin: 5,
     width: 390,
-    borderRadius: '5px',
-    color: '#FFF',
-    backgroundColor: '#05445E',
+    borderRadius: "5px",
+    color: "#FFF",
+    backgroundColor: "#05445E",
   },
 
   touchableValue: {
     fontSize: 20,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    color: '#FFF',
+    fontWeight: "bold",
+    textAlign: "center",
+    color: "#FFF",
   },
 
   login: {
@@ -213,7 +222,7 @@ const styles = StyleSheet.create({
   inputItems: {
     padding: 15,
     margin: 5,
-    borderColor: '#FFF',
+    borderColor: "#FFF",
     borderWidth: 3,
     borderRadius: "5px",
     color: "#05445E",
@@ -228,5 +237,5 @@ const styles = StyleSheet.create({
     shadowRadius: 1.41,
 
     elevation: 2,
-  }
+  },
 });
