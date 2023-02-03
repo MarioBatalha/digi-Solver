@@ -20,6 +20,10 @@ import Prescription from "../../assets/img/prescription.png";
 import Clinic from "../../assets/img/clinic.png";
 import Doctor from "../../assets/img/doctor-injection.png";
 
+import { getAuth, signOut } from "firebase/auth";
+import { initializeApp } from "firebase/app";
+import { firebaseConfig } from "./../../../firebase.config";
+
 const SquareView = (props) => {
   return (
     <View
@@ -37,11 +41,25 @@ const SquareView = (props) => {
 };
 
 const Home = ({ navigation }) => {
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  const handleSignOut = () => {
+    signOut(auth).then(() => {
+      console.log('Sign out')
+      navigation.navigate('Principal');
+    }).catch((error) => {
+      console.log(error)
+    });
+  }
   return (
     <View style={styles.profileContainer}>
       <View style={styles.profileContent}>
         <Text style={styles.title}>Olá, Mário Batalha</Text>
         <Image source={UserImage} style={styles.avatar} />
+        <TouchableOpacity onPress={handleSignOut}>
+          <FontAwesome name="sign-out" size={24} color="#189AB4" />
+        </TouchableOpacity>
       </View>
       <View style={styles.testContainer}>
         <TextInput
