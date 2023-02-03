@@ -12,6 +12,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@react-native-firebase/app": "^17.0.0",
     "@react-navigation/native": "^6.1.2",
     "@react-navigation/native-stack": "^6.9.8",
     "expo": "^47.0.13",
@@ -21,6 +22,7 @@
     "expo-image-picker": "~14.0.2",
     "expo-status-bar": "~1.4.2",
     "expo-vector-icons": "^10.0.1",
+    "firebase": "^9.16.0",
     "framer-motion": "^8.5.5",
     "install": "^0.13.0",
     "react": "18.1.0",
