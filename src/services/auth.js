@@ -1,4 +1,4 @@
-export const logIn = () => {
+export const SignIn = () => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             resolve({

@@ -1,15 +1,10 @@
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { NavigationContainer } from '@react-navigation/native';
+import Routes from './src/routes/';
 
-import Routes from "./src/routes/";
-import Context from ".//src/context";
-
-const App = ({ navigation }) => {
+const App = () => {
   return (
     <NavigationContainer>
-      <Context.Provider>
         <Routes />
-      </Context.Provider>
     </NavigationContainer>
   );
 };

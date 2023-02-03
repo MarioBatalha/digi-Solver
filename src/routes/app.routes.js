@@ -11,7 +11,7 @@ import Profile from "../screens/profile";
 import ShopCart from "../screens/shop-cart";
 import Consult from "../screens/consult";
 import Notification from "../screens/notification";
-import LogIn from "../screens/login";
+import SignIn from "../screens/sign-in";
 import Register from "../screens/register";
 
 const AppStack = createNativeStackNavigator();
@@ -19,7 +19,7 @@ const AppStack = createNativeStackNavigator();
 const App = ({ navigation }) => {
   return (
       <AppStack.Navigator initialRouteName="Principal">
-        <AppStack.Screen name="Log in" component={LogIn} />
+        <AppStack.Screen name="Sign in" component={SignIn} />
         <AppStack.Screen name="Registrar" component={Register} />
         <AppStack.Screen name="Principal" component={Main} />
         <AppStack.Screen name="Consultas" component={Consult} />

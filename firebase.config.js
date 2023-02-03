@@ -1,3 +1,4 @@
+
 export const firebaseConfig = {
   apiKey: "AIzaSyCZNnh6ioXrxLA5HKCKYa4uRiwX0gAx61Y",
   authDomain: "testes-no-cubico.firebaseapp.com",

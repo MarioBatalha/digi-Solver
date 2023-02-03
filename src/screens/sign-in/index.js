@@ -1,4 +1,4 @@
-import {  useState, useContext } from 'react';
+import {  useState } from 'react';
 import {
   View,
   TextInput,
@@ -6,16 +6,34 @@ import {
   Image,
   Text,
   TouchableOpacity,
+  Alert,
 } from "react-native";
+import { AntDesign } from '@expo/vector-icons';
+import{ getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { initializeApp } from 'firebase/app';
+import { firebaseConfig } from '../../../firebase.config';
 
 import Logo from "../../assets/img/digisolve-logo.png";
 
-const LogIn = ({ navigation }) => {
+const SignIn = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogIn = () => {
-    alert("Login successful")
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  const handleSignIn = () => {
+    signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      Alert.alert('Bem-vindo de volta.')
+      const user = userCredential.user;
+      navigation.navigate('Home')
+      console.table(user)
+    })
+    .catch((error) => {
+      console.log(error)
+      Alert.alert(err)
+    })
   }
 
   return (
@@ -39,14 +57,19 @@ const LogIn = ({ navigation }) => {
           onChangeText={(text) => setPassword(text)}
           keyboardType="visible-password"
           secureTextEntry
-          onSubmitEditing={() => alert("Welcome to GeeksforGeeks")}
           style={styles.input}
         />
         <TouchableOpacity
           style={styles.button}
-          onPress={handleLogIn}
+          onPress={handleSignIn}
         >
           <Text style={styles.touchableValue}>Entrar</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.buttonGoogle}
+        >
+          <Text style={styles.touchableValueGoogle}>Usar conta google</Text>
+          <AntDesign name="google" size={24} color="white" />
         </TouchableOpacity>
         <View style={styles.noAccount}>
           <TouchableOpacity
@@ -61,7 +84,7 @@ const LogIn = ({ navigation }) => {
   );
 };
 
-export default LogIn;
+export default SignIn;
 
 const styles = StyleSheet.create({
   input: {
@@ -160,6 +183,27 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     textAlign: "center",
+    color: "#FFF",
+  },
+
+  buttonGoogle: {
+    display: 'flex',
+    flexDirection: "row",
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 13,
+    margin: 5,
+    width: 390,
+    borderRadius: "5px",
+    color: "#FFF",
+    backgroundColor: "#E24033",
+  },
+
+  touchableValueGoogle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginRight: 5,
     color: "#FFF",
   },
 });

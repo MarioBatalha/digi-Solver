@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   View,
   TextInput,
@@ -7,10 +8,30 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-import ButtonComponent from "../../components/Button";
 import Logo from "../../assets/img/digisolve-logo.png";
+import{ getAuth, createUserEmailAndPassword } from 'firebase/auth';
+import { initializeApp } from 'firebase/app';
+import { firebaseConfig } from './../../../firebase.config';
 
-const LogIng = ({ navigation }) => {
+const SignIn = ({ navigation }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  const handleCreateAccount = () => {
+    createUserEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      Alert.alert('conta criada com sucesso')
+      const user = userCredential.user;
+      navigation.navigate('Log in')
+    })
+    .catch(err => {
+      console.log(err)
+      Alert.alert(err)
+    })
+  }
   return (
     <View style={styles.login}>
       <Image source={Logo} style={styles.logoImg} />
@@ -27,11 +48,13 @@ const LogIng = ({ navigation }) => {
            placeholder="Email"
            keyboardType="name"
           style={styles.input}
+          onChangeText={(text) => setEmail(text)}
         />
         <TextInput
          maxLength={15}
           placeholder="Password"
           keyboardType="visible-password"
+          onChange={(text) => setPassword(text)}
           secureTextEntry
           style={styles.input}
         />
@@ -62,13 +85,13 @@ const LogIng = ({ navigation }) => {
            placeholder="É alergico a alguma substância"
           style={styles.input}
         />
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Profile")}>
+        <TouchableOpacity style={styles.button} onPress={handleCreateAccount}>
           <Text style={styles.touchableValue}>Registrar</Text>
         </TouchableOpacity>
         <View style={styles.noAccount}>
           <TouchableOpacity
             style={styles.createAccount}
-            onPress={() => navigation.navigate("Log in")}
+            onPress={() => navigation.navigate("Sign in")}
           >
             <Text style={styles.subtitle}>Já tenho uma conta? Entre.</Text>
           </TouchableOpacity>
@@ -78,7 +101,7 @@ const LogIng = ({ navigation }) => {
   );
 };
 
-export default LogIng;
+export default SignIn;
 
 const styles = StyleSheet.create({
   input: {
