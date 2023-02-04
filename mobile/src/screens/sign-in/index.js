@@ -116,10 +116,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "column",
+    backgroundColor: "#FFF",
     width: "100%",
     height: "97%",
     padding: 10,
-    backgroundColor: "#FFF",
+   
   },
 
   loginContainer: {
@@ -132,7 +133,6 @@ const styles = StyleSheet.create({
     marginTop: 50,
     padding: 30,
     borderRadius: "30px",
-    backgroundColor: "#189AB4",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,

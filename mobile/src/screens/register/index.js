@@ -23,20 +23,20 @@ const SignIn = ({ navigation }) => {
 
   const handleCreateAccount = () => {
     createUserWithEmailAndPassword(auth, email, password)
-    .then(() => {
-      Alert.alert('conta criada com sucesso');
-      navigation.navigate('Home')
-    })
-    .catch(error => {
-      if (error.code === 'auth/email-already-in-use') {
-        Alert.alert('email já está registrado');
-      }
-  
-      if (error.code === 'auth/invalid-email') {
-        Alert.alert('Endereço inválido');
-      }
-      Alert.alert(error);
-    });
+      .then(() => {
+        Alert.alert("conta criada com sucesso");
+        navigation.navigate("Home");
+      })
+      .catch((error) => {
+        if (error.code === "auth/email-already-in-use") {
+          Alert.alert("email já está registrado");
+        }
+
+        if (error.code === "auth/invalid-email") {
+          Alert.alert("Endereço inválido");
+        }
+        Alert.alert(error);
+      });
   };
   return (
     <View style={styles.login}>
@@ -154,9 +154,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "column",
+    backgroundColor: "#FFF",
     width: "100%",
     padding: 10,
-    backgroundColor: "#FFF",
   },
 
   loginContainer: {
@@ -169,7 +169,6 @@ const styles = StyleSheet.create({
     marginTop: 50,
     padding: 30,
     borderRadius: "30px",
-    backgroundColor: "#189AB4",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,

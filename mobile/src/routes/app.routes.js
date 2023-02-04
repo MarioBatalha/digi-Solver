@@ -13,6 +13,7 @@ import Consult from "../screens/consult";
 import Notification from "../screens/notification";
 import SignIn from "../screens/sign-in";
 import Register from "../screens/register";
+import Payment from '../screens/payment';
 
 const AppStack = createNativeStackNavigator();
 
@@ -31,6 +32,7 @@ const App = ({ navigation }) => {
         <AppStack.Screen name="Perfil" component={Profile} />
         <AppStack.Screen name="Carrinho" component={ShopCart} />
         <AppStack.Screen name="Notificações" component={Notification} />
+        <AppStack.Screen name="Pagamento" component={Payment} />
       </AppStack.Navigator>
   );
 };
