@@ -17,12 +17,13 @@ import { firebaseConfig } from "./../../../firebase.config";
 const SignIn = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
 
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
 
   const handleCreateAccount = () => {
-    createUserWithEmailAndPassword(auth, email, password)
+    createUserWithEmailAndPassword(auth, email, password, name)
       .then(() => {
         Alert.alert("conta criada com sucesso");
         navigation.navigate("Home");
@@ -46,7 +47,7 @@ const SignIn = ({ navigation }) => {
         Crie uma conta e explore das nossas soluções.
       </Text>
       <View style={styles.loginContainer}>
-        <TextInput placeholder="Nome completo" style={styles.input} />
+        <TextInput placeholder="Nome completo" value={name} style={styles.input} />
         <TextInput
           placeholder="Email"
           keyboardType="name"

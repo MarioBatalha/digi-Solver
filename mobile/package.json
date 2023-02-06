@@ -13,7 +13,6 @@
   },
   "dependencies": {
     "@expo/webpack-config": "^0.17.2",
-    "@react-native-async-storage/async-storage": "react-native-async-storage/async-storage",
     "@react-native-firebase/app": "^17.0.0",
     "@react-native-firebase/auth": "^17.0.0",
     "@react-navigation/native": "^6.1.2",

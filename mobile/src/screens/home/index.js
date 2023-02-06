@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 import {
   View,
   Text,
@@ -7,13 +7,14 @@ import {
   TouchableOpacity,
   ScrollView,
   TextInput,
+  Alert,
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { FontAwesome } from '@expo/vector-icons';
-import { Ionicons } from '@expo/vector-icons';
+import { FontAwesome } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 
 import Pregnancy from "../../assets/img/pregnant.jpeg";
 import Prescription from "../../assets/img/prescription.png";
@@ -41,27 +42,43 @@ const SquareView = (props) => {
 };
 
 const Home = ({ navigation }) => {
-  const [email, setEmail ] = useState("");
+  const [pregnancy, setPregnancy] = useState([
+    { name: "Teresa Ventura", price: 2200, date: new Date() },
+  ]);
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
 
-  const handleGetEmail = async () => {
-    const email = await AsyncStorage.getItem('userInfo', userInfo)
-    setEmail(email)
-  }
+  const handlePregnancyTest = async () => {
+    setPregnancy([
+      ...pregnancy,
+      {
+        type: "Test de grávidez",
+        name: "Maria Rosa",
+        date: new Date(),
+        price: 56000 + "AOA",
+        phone: 923110011,
+      },
+    ]);
 
+    setTimeout(() => {
+      Alert.alert(pregnancy);
+      navigation.navigate("Exames de sangue");
+    }, 2000);
+  };
   const handleSignOut = () => {
-    signOut(auth).then(() => {
-      console.log('Sign out')
-      navigation.navigate('Principal');
-    }).catch((error) => {
-      console.log(error)
-    });
-  }
+    signOut(auth)
+      .then(() => {
+        console.log("Sign out");
+        navigation.navigate("Principal");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <View style={styles.profileContainer}>
       <View style={styles.profileContent}>
-        <Text style={styles.title}>Olá, {email}</Text>
+        <Text style={styles.title}>Olá,</Text>
         <TouchableOpacity onPress={handleSignOut}>
           <FontAwesome name="sign-out" size={24} color="#189AB4" />
         </TouchableOpacity>
@@ -74,7 +91,7 @@ const Home = ({ navigation }) => {
         />
         <Text style={styles.popular}>Testes populares</Text>
         <View style={styles.testContent}>
-          <TouchableOpacity style={styles.test} onPress={() => navigation.navigate("Teste de grávidez")}>
+          <TouchableOpacity style={styles.test} onPress={handlePregnancyTest}>
             <Image source={Pregnancy} style={styles.testImage} />
             <View style={styles.testIcon}>
               <AntDesign name="plus" size={24} color="black" />
@@ -83,7 +100,10 @@ const Home = ({ navigation }) => {
               <Text style={styles.subtitle}>Teste de grávidez</Text>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.test} onPress={() => navigation.navigate('Nova receita')}>
+          <TouchableOpacity
+            style={styles.test}
+            onPress={() => navigation.navigate("Nova receita")}
+          >
             <Image source={Prescription} style={styles.testImage} />
             <View style={styles.testIcon}>
               <AntDesign name="plus" size={24} color="black" />
@@ -92,7 +112,10 @@ const Home = ({ navigation }) => {
               <Text style={styles.subtitle}>Receitas</Text>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.test} onPress={() => navigation.navigate('Exames de sangue')}>
+          <TouchableOpacity
+            style={styles.test}
+            onPress={() => navigation.navigate("Exames de sangue")}
+          >
             <Image source={Doctor} style={styles.testImage} />
             <View style={styles.testIcon}>
               <AntDesign name="plus" size={24} color="black" />
@@ -101,7 +124,10 @@ const Home = ({ navigation }) => {
               <Text style={styles.subtitle}>Exames de sangue</Text>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.test} onPress={() => navigation.navigate('Exame do colón')}>
+          <TouchableOpacity
+            style={styles.test}
+            onPress={() => navigation.navigate("Exame do colón")}
+          >
             <Image source={Clinic} style={styles.testImage} />
             <View style={styles.testIcon}>
               <AntDesign name="plus" size={24} color="black" />
@@ -111,10 +137,14 @@ const Home = ({ navigation }) => {
             </View>
           </TouchableOpacity>
         </View>
+        <Text>{pregnancy.map((item) => item.name)}</Text>
         <Text style={styles.popular}>O que precisas?</Text>
         <ScrollView horizontal={true}>
           <SquareView size={80}>
-            <TouchableOpacity style={styles.needDesc} onPress={() => navigation.navigate('Consultas')}>
+            <TouchableOpacity
+              style={styles.needDesc}
+              onPress={() => navigation.navigate("Consultas")}
+            >
               <Fontisto name="doctor" size={25} color="#189AB4" />
               <Text style={styles.needTitle}>Doctor</Text>
             </TouchableOpacity>
@@ -155,17 +185,33 @@ const Home = ({ navigation }) => {
           </SquareView>
         </ScrollView>
         <View style={styles.menuContainer}>
-          <TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate('Home')}>
-          <FontAwesome name="home" size={35} color="#7D7D86" />
+          <TouchableOpacity
+            style={styles.menuItem}
+            onPress={() => navigation.navigate("Home")}
+          >
+            <FontAwesome name="home" size={35} color="#7D7D86" />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate('Notificações')}>
-          <FontAwesome name="bell" size={35} color="#7D7D86" />
+          <TouchableOpacity
+            style={styles.menuItem}
+            onPress={() => navigation.navigate("Notificações")}
+          >
+            <FontAwesome name="bell" size={35} color="#7D7D86" />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate('Carrinho')}>
-          <FontAwesome name="shopping-cart" size={35} color="#7D7D86" />
+          <TouchableOpacity
+            style={styles.menuItem}
+            onPress={() => navigation.navigate("Carrinho")}
+          >
+            <FontAwesome name="shopping-cart" size={35} color="#7D7D86" />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate('Sign in')}>
-          <Ionicons name="ios-person-circle-outline" size={35} color="#7D7D86" />
+          <TouchableOpacity
+            style={styles.menuItem}
+            onPress={() => navigation.navigate("Sign in")}
+          >
+            <Ionicons
+              name="ios-person-circle-outline"
+              size={35}
+              color="#7D7D86"
+            />
           </TouchableOpacity>
         </View>
       </View>
@@ -340,7 +386,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     height: 70,
-    width: '97%',
+    width: "97%",
     margin: 5,
     backgroundColor: "#FFF",
     borderRadius: "25px",
@@ -363,5 +409,5 @@ const styles = StyleSheet.create({
     height: 60,
     width: 80,
     padding: 10,
-  }
+  },
 });
