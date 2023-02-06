@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   View,
   Text,
@@ -14,7 +15,6 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 
-import UserImage from "../../assets/img/doctor.jpeg";
 import Pregnancy from "../../assets/img/pregnant.jpeg";
 import Prescription from "../../assets/img/prescription.png";
 import Clinic from "../../assets/img/clinic.png";
@@ -41,8 +41,14 @@ const SquareView = (props) => {
 };
 
 const Home = ({ navigation }) => {
+  const [email, setEmail ] = useState("");
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
+
+  const handleGetEmail = async () => {
+    const email = await AsyncStorage.getItem('userInfo', userInfo)
+    setEmail(email)
+  }
 
   const handleSignOut = () => {
     signOut(auth).then(() => {
@@ -55,8 +61,7 @@ const Home = ({ navigation }) => {
   return (
     <View style={styles.profileContainer}>
       <View style={styles.profileContent}>
-        <Text style={styles.title}>Olá, Mário Batalha</Text>
-        <Image source={UserImage} style={styles.avatar} />
+        <Text style={styles.title}>Olá, {email}</Text>
         <TouchableOpacity onPress={handleSignOut}>
           <FontAwesome name="sign-out" size={24} color="#189AB4" />
         </TouchableOpacity>

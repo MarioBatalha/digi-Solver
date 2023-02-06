@@ -27,6 +27,9 @@ const SignIn = ({ navigation }) => {
     .then((userCredential) => {
       Alert.alert('Bem-vindo de volta.')
       const user = userCredential.user;
+      const { email } = user;
+      setUserInfo(email)
+
       navigation.navigate('Home')
       console.table(user)
     })

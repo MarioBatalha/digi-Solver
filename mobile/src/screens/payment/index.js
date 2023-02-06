@@ -1,17 +1,43 @@
-import { useState, useEffect } from "react";
-import { Keyboard } from "react-native";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, Alert } from "react-native";
+import VisaCard from "../../assets/img/visa.png";
 
 const Payment = ({ navigation }) => {
+  const handlePayment = async () => {
+    setTimeout(() => {
+      Alert.alert('Pagamento feito com sucesso')
+      navigation.navigate("Home")
+    }, 2000)
+  }
   return (
-    <View>
+      <View>
       <View style={styles.loginContainer}>
         <Text style={styles.title}>Dados de pagamento</Text>
-        <Text style={styles.title}>Preencha com os dados do cartão</Text>
+        <Text style={styles.subtitle}>Preencha com os dados do cartão</Text>
+        <Image source={VisaCard} width={200} height={200}/>
+        <TextInput
+          maxLength={16}
+          placeholder="4242-4333-2980-3333"
+          keyboardType="numeric"
+          style={styles.input}
+        />
+        <View style={styles.inputGroup}>
+          <TextInput
+            maxLength={4}
+            placeholder="MM/YYYY"
+            keyboardType="numeric"
+            style={styles.inputItems}
+          />
 
+        <TextInput
+            maxLength={4}
+            placeholder="CVC"
+            keyboardType="numeric"
+            style={styles.inputItems}
+          />  
+        </View>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate("Pagamento")}
+          onPress={handlePayment}
         >
           <Text style={styles.touchableValue}>Concluír pagamento</Text>
         </TouchableOpacity>
@@ -98,7 +124,7 @@ const styles = StyleSheet.create({
     borderRadius: "5px",
     color: "#05445E",
     backgroundColor: "#FFF",
-    width: 123,
+    width: 190,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
