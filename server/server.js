@@ -26,8 +26,14 @@ app.get("/signup", (req, res) => {
 app.post("/signup", async (req, res) => {
 	try {
 		const data = {
+			name: req.body.name,
 			email: req.body.email,
 			password: req.body.password,
+			weight: req.body.weight,
+			height: req.body.height,
+			age: req.body.age,
+			phone: req.body.phone,
+			warning: req.body.warning,
 		};
 
 		await collection.insertMany([data]);

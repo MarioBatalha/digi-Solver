@@ -21,7 +21,7 @@ import Doctor from "../../assets/img/doctor-injection.png";
 
 import { useNavigation } from "@react-navigation/native";
 import { styles } from "../../../style";
-
+import { useGlobalContext } from "../../contexts";
 const SquareView = (props) => {
 	return (
 		<View
@@ -39,11 +39,12 @@ const SquareView = (props) => {
 };
 
 export const Home = () => {
+	const { email } = useGlobalContext();
 	const { navigate } = useNavigation();
 	return (
 		<View style={styles.profileContainer}>
 			<View style={styles.profileContent}>
-				<Text style={styles.title}>Olá, </Text>
+				<Text style={styles.title}>Olá, {email}</Text>
 				<TouchableOpacity activeOpacity={0.7}>
 					<FontAwesome name="sign-out" size={24} color="#189AB4" />
 				</TouchableOpacity>

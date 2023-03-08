@@ -1,8 +1,8 @@
 import React, { createContext, useContext, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
+import axios from "axios";
 
 const AppContext = createContext();
-const baseURL = "http://localhost:3333/";
 const AppProvider = ({ children }) => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -12,16 +12,16 @@ const AppProvider = ({ children }) => {
 
 	const handleUserSignin = async () => {
 		try {
-			const endpoint = "signin";
-			const response = await axios.post(`${baseURL}/${endpoint}`, {
+			const response = await axios.post("http://localhost:3333/signin", {
 				email,
 				password,
 			});
 
+			console.log(response);
+
 			const userData = await response.json();
 			navigate("Home");
 			setUser(userData);
-			console.log(userData);
 		} catch (error) {
 			alert(error.message);
 		}
@@ -35,7 +35,15 @@ const AppProvider = ({ children }) => {
 	};
 	return (
 		<AppContext.Provider
-			value={{ email, password, user, handleUserSignin, handleUserSignup }}
+			value={{
+				email,
+				password,
+				setEmail,
+				setPassword,
+				user,
+				handleUserSignin,
+				handleUserSignup,
+			}}
 		>
 			{children}
 		</AppContext.Provider>

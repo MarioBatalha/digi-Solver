@@ -15,7 +15,8 @@ import Logo from "../../assets/img/digisolve-logo.png";
 import { useGlobalContext } from "../../contexts";
 
 export const SignIn = () => {
-	const { email, password, handleSignin } = useGlobalContext();
+	const { email, password, setEmail, setPassword, handleUserSignin } =
+		useGlobalContext();
 	const { navigate } = useNavigation();
 
 	const handleSignIn = () => {
@@ -48,7 +49,7 @@ export const SignIn = () => {
 				<TouchableOpacity
 					activeOpacity={0.7}
 					style={styles.signinButton}
-					onPress={handleSignin}
+					onPress={handleUserSignin}
 				>
 					<Text style={styles.signinTouchableValue}>Entrar</Text>
 				</TouchableOpacity>

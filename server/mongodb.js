@@ -10,6 +10,11 @@ mongoose
 	});
 
 const signinSchema = new mongoose.Schema({
+	name: {
+		type: String,
+		required: true,
+	},
+
 	email: {
 		type: String,
 		required: true,
@@ -18,6 +23,38 @@ const signinSchema = new mongoose.Schema({
 	password: {
 		type: String,
 		required: true,
+	},
+
+	weight: {
+		type: Number,
+		required: true,
+	},
+
+	height: {
+		type: Number,
+		required: true,
+	},
+
+	age: {
+		type: Number,
+		max: 2,
+		required: true,
+	},
+
+	phone: {
+		type: Number,
+		max: 12,
+		required: true,
+	},
+
+	warning: {
+		type: String,
+		max: 200,
+	},
+
+	createdAt: {
+		type: Date,
+		default: new Date().toString(),
 	},
 });
 
