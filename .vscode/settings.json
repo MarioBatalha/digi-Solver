@@ -1,0 +1,13 @@
+{
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"editor.formatOnSave": true,
+	"editor.linkedEditing": true,
+	"json.schemas": [],
+	"settingsSync.ignoredExtensions": [],
+	"editor.codeLensFontFamily": "Menlo, Monaco, 'Courier New",
+	"scm.inputFontFamily": "Menlo, Monaco, 'Courier New",
+	"editor.fontLigatures": false,
+	"editor.codeLensFontSize": 12,
+	"terminal.integrated.fontFamily": "Menlo, Monaco, 'Courier New",
+	"workbench.colorTheme": "Omni"
+}

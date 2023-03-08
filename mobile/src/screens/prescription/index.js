@@ -1,9 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { Button, Image, View, TouchableOpacity, Text, StyleSheet, Alert } from "react-native";
+import {
+  Button,
+  Image,
+  View,
+  TouchableOpacity,
+  Text,
+  Alert,
+} from "react-native";
 import * as ImagePicker from "expo-image-picker";
-
-const Prescription = ({ navigation }) => {
+import { useNavigation } from "@react-navigation/native";
+import { styles } from "../../../style";
+export const Prescription = () => {
   const [image, setImage] = useState(null);
+  const { navigate } = useNavigation();
 
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
@@ -21,44 +30,26 @@ const Prescription = ({ navigation }) => {
     }
   };
 
-  const  handleSaveImage = () => {
-    Alert.alert('Receita salva com sucesso');
-    navigation.navigate("Home")
-  }
+  const handleSaveImage = () => {
+    Alert.alert("Receita salva com sucesso");
+    navigate("Home");
+  };
 
   return (
-    <View style={styles.container}>
+    <View style={styles.prescriptionContainer}>
       <Button title="Adicionar receita" onPress={pickImage} />
       {image && (
         <Image source={{ uri: image }} style={{ width: 400, height: 650 }} />
       )}
-      {image && (<TouchableOpacity style={styles.button} onPress={handleSaveImage}>
-        <Text style={styles.touchableValue}>Salvar</Text>
-      </TouchableOpacity>) }
+      {image && (
+        <TouchableOpacity
+          activeOpacity={0.7}
+          style={styles.prescriptionButton}
+          onPress={handleSaveImage}
+        >
+          <Text style={styles.prescriptionTouchableValue}>Salvar</Text>
+        </TouchableOpacity>
+      )}
     </View>
   );
 };
-
-export default Prescription;
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  button: {
-    padding: 13,
-    margin: 5,
-    width: 400,
-    borderRadius: "5px",
-    color: "#FFF",
-    backgroundColor: "#05445E",
-  },
-
-  touchableValue: {
-    fontSize: 20,
-    fontWeight: "bold",
-    textAlign: "center",
-    color: "#FFF",
-  },
-});

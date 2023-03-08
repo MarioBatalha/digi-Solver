@@ -1,11 +1,9 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text } from "react-native";
 
-const ColonExam = ({navigation}) => {
-    return (
-        <View>
-            <Text> user settings</Text>
-        </View>
-    )
-}
-
-export default ColonExam;
+export const ColonExam = () => {
+  return (
+    <View>
+      <Text> user settings</Text>
+    </View>
+  );
+};

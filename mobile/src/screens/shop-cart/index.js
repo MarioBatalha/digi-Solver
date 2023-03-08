@@ -1,11 +1,9 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text } from "react-native";
 
-const ShopCart = ({navigation}) => {
-    return (
-        <View>
-            <Text> Shop Cart consult</Text>
-        </View>
-    )
-}
-
-export default ShopCart;
+export const ShopCart = () => {
+  return (
+    <View>
+      <Text> Shop Cart consult</Text>
+    </View>
+  );
+};
