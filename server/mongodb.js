@@ -37,24 +37,21 @@ const signinSchema = new mongoose.Schema({
 
 	age: {
 		type: Number,
-		max: 2,
 		required: true,
 	},
 
 	phone: {
 		type: Number,
-		max: 12,
 		required: true,
 	},
 
 	warning: {
 		type: String,
-		max: 200,
 	},
 
 	createdAt: {
 		type: Date,
-		default: new Date().toString(),
+		default: new Date().toISOString(),
 	},
 });
 
