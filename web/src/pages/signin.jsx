@@ -1,4 +1,4 @@
-import Logo from "./../assets/112.jpg";
+import ChildrenImg from "./../assets/112.jpg";
 import { useGlobalContext } from "../context";
 
 export function Signin() {
@@ -9,7 +9,7 @@ export function Signin() {
 		<main>
 			<aside>
 				<div className="overlay"></div>
-				<img src={Logo} className="sign-ilustratation" />
+				<img src={ChildrenImg} className="sign-ilustratation" />
 				<h4>Para mais crianças saudáveis.</h4>
 			</aside>
 			<section>

@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const AppContext = createContext();
 const AppProvider = ({ children }) => {
@@ -18,8 +18,6 @@ const AppProvider = ({ children }) => {
 	const [price, setPrice] = useState();
 	const [isLogin, setIsLogin] = useState(false);
 
-	let history = useHistory();
-
 	const handleAdminSignin = async (e) => {
 		e.preventDefault();
 		try {
@@ -28,17 +26,41 @@ const AppProvider = ({ children }) => {
 				password,
 			});
 
-			console.log(response);
-
 			const userData = await response.json();
 			setAdmin(userData);
-			alert("Bem-vindo de volta");
 			setIsLogin(true);
+
 			if (isLogin) {
-				history.push("/admin/dashboard");
 			}
 		} catch (error) {
 			alert(error.message);
+		}
+	};
+
+	const handleNewExam = async (e) => {
+		e.preventDefault();
+		const testData = {
+			name,
+			email,
+			weight,
+			height,
+			age,
+			phone,
+			warning,
+			examType,
+			status,
+			price,
+		};
+		try {
+			const response = await axios.post(
+				"http://localhost:3333/exam/request",
+				testData
+			);
+
+			console.log("Exam request was successful");
+			setUser(response);
+		} catch (error) {
+			console.log("Exam request: ", error);
 		}
 	};
 
@@ -99,6 +121,7 @@ const AppProvider = ({ children }) => {
 				handleAdminSignin,
 				handleAdminSignup,
 				handleAdminSignout,
+				handleNewExam,
 			}}
 		>
 			{children}
