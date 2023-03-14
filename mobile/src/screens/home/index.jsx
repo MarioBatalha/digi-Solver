@@ -39,13 +39,21 @@ const SquareView = (props) => {
 };
 
 export const Home = () => {
-	const { email } = useGlobalContext();
+	const {
+		email,
+		handleUserSignout,
+		handlePregnancyTestRequest,
+		handleBloodTestRequest,
+		handlePrescriptionRequest,
+		handleColonExamRequest,
+	} = useGlobalContext();
 	const { navigate } = useNavigation();
+
 	return (
 		<View style={styles.profileContainer}>
 			<View style={styles.profileContent}>
 				<Text style={styles.title}>Olá, {email}</Text>
-				<TouchableOpacity activeOpacity={0.7}>
+				<TouchableOpacity activeOpacity={0.7} onPress={handleUserSignout}>
 					<FontAwesome name="sign-out" size={24} color="#189AB4" />
 				</TouchableOpacity>
 			</View>
@@ -60,7 +68,7 @@ export const Home = () => {
 					<TouchableOpacity
 						activeOpacity={0.7}
 						style={styles.test}
-						onPress={() => navigate("Teste de grávidez")}
+						onPress={handlePregnancyTestRequest}
 					>
 						<Image source={Pregnancy} style={styles.testImage} />
 						<View style={styles.testIcon}>
@@ -73,7 +81,7 @@ export const Home = () => {
 					<TouchableOpacity
 						activeOpacity={0.7}
 						style={styles.test}
-						onPress={() => navigate("Nova receita")}
+						onPress={handlePrescriptionRequest}
 					>
 						<Image source={Prescription} style={styles.testImage} />
 						<View style={styles.testIcon}>
@@ -86,7 +94,7 @@ export const Home = () => {
 					<TouchableOpacity
 						activeOpacity={0.7}
 						style={styles.test}
-						onPress={() => navigate("Exames de sangue")}
+						onPress={handleBloodTestRequest}
 					>
 						<Image source={Doctor} style={styles.testImage} />
 						<View style={styles.testIcon}>
@@ -99,7 +107,7 @@ export const Home = () => {
 					<TouchableOpacity
 						activeOpacity={0.7}
 						style={styles.test}
-						onPress={() => navigate("Exame do colón")}
+						onPress={handleColonExamRequest}
 					>
 						<Image source={Clinic} style={styles.testImage} />
 						<View style={styles.testIcon}>

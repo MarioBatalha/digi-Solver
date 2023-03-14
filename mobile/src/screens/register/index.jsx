@@ -1,12 +1,5 @@
 import { useState } from "react";
-import {
-	View,
-	TextInput,
-	Image,
-	Text,
-	TouchableOpacity,
-	Alert,
-} from "react-native";
+import { View, TextInput, Image, Text, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import Logo from "../../assets/img/digisolve-logo.png";
@@ -31,8 +24,7 @@ export const Register = () => {
 		setAge,
 		setPhone,
 		setWarning,
-		user,
-		handleUserSignup,
+		handlePatientSignup,
 	} = useGlobalContext();
 
 	const { navigate } = useNavigation();
@@ -60,7 +52,7 @@ export const Register = () => {
 				/>
 				<TextInput
 					maxLength={15}
-					placeholder="Password"
+					placeholder="Palavra-passe"
 					value={password}
 					keyboardType="visible-password"
 					onChangeText={(text) => setPassword(text)}
@@ -111,7 +103,7 @@ export const Register = () => {
 				<TouchableOpacity
 					style={styles.registerButton}
 					activeOpacity={0.7}
-					onPress={handleUserSignup}
+					onPress={handlePatientSignup}
 				>
 					<Text style={styles.registerTouchableValue}>Registrar</Text>
 				</TouchableOpacity>

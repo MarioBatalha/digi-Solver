@@ -15,13 +15,9 @@ import Logo from "../../assets/img/digisolve-logo.png";
 import { useGlobalContext } from "../../contexts";
 
 export const SignIn = () => {
-	const { email, password, setEmail, setPassword, handleUserSignin } =
+	const { email, password, setEmail, setPassword, handlePatientSignin } =
 		useGlobalContext();
 	const { navigate } = useNavigation();
-
-	const handleSignIn = () => {
-		Alert.alert("sigin success");
-	};
 
 	return (
 		<View style={styles.signin}>
@@ -39,7 +35,7 @@ export const SignIn = () => {
 					style={styles.signinInput}
 				/>
 				<TextInput
-					placeholder="Password"
+					placeholder="Palavra-passe"
 					value={password}
 					onChangeText={(text) => setPassword(text)}
 					keyboardType="visible-password"
@@ -49,7 +45,7 @@ export const SignIn = () => {
 				<TouchableOpacity
 					activeOpacity={0.7}
 					style={styles.signinButton}
-					onPress={handleUserSignin}
+					onPress={handlePatientSignin}
 				>
 					<Text style={styles.signinTouchableValue}>Entrar</Text>
 				</TouchableOpacity>
@@ -63,7 +59,7 @@ export const SignIn = () => {
 						style={styles.createAccount}
 						onPress={() => navigate("Registrar")}
 					>
-						<Text style={styles.siginSubtitle}>
+						<Text style={styles.signinSubtitle}>
 							Não tem uma conta? Criar uma.
 						</Text>
 					</TouchableOpacity>

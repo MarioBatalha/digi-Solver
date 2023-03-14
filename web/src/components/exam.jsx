@@ -34,7 +34,7 @@ export function Exam() {
 				<section>
 					<img src={Logo} alt="Digisolver" />
 					<h1>Enserir novos exames</h1>
-					<p>Descreva detalhadamente o pedido pedido médico</p>
+					<p>Descreva detalhadamente o pedido médico</p>
 
 					<Link to="/admin/dashboard" className="back-link">
 						<FiArrowLeft size={16} color="#05445e" />

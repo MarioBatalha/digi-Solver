@@ -1,4 +1,4 @@
-import ChildrenImg from "./../assets/112.jpg";
+import DoctorImg from "./../assets/doctor.jpg";
 import { useGlobalContext } from "../context";
 
 export function Signin() {
@@ -9,8 +9,8 @@ export function Signin() {
 		<main>
 			<aside>
 				<div className="overlay"></div>
-				<img src={ChildrenImg} className="sign-ilustratation" />
-				<h4>Para mais crianças saudáveis.</h4>
+				<img src={DoctorImg} className="sign-ilustratation" />
+				<h4>Para mais pessoas saudáveis.</h4>
 			</aside>
 			<section>
 				<div className="form-header">
@@ -35,11 +35,11 @@ export function Signin() {
 
 						<div className="input-box">
 							<label htmlFor="password" className="user-details">
-								Password
+								Palavra-passe
 							</label>
 							<input
 								type="password"
-								placeholder="Password"
+								placeholder="Palavra-passe"
 								value={password}
 								onChange={(e) => setPassword(e.target.value)}
 								name="password"
