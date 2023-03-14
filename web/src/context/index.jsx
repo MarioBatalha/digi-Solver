@@ -17,10 +17,14 @@ const AppProvider = ({ children }) => {
 	const [status, setStatus] = useState();
 	const [price, setPrice] = useState();
 	const [isLogin, setIsLogin] = useState(false);
+	const [alert, setAlert] = useState({ show: false, msg: "", type: "" });
 
-	const handleAdminSignin = async (e) => {
+	const handleAdminSignin = async (e, navigation) => {
 		e.preventDefault();
 		try {
+			if (!email || !password) {
+				handleShowAlert(true, "Por favor, preencha os campos", "danger");
+			}
 			const response = await axios.post("http://localhost:3333/admin/signin", {
 				email,
 				password,
@@ -30,11 +34,17 @@ const AppProvider = ({ children }) => {
 			setAdmin(userData);
 			setIsLogin(true);
 
-			if (isLogin) {
+			if (!isLogin) {
+				setIsLogin(true);
+				console.log("Bem-vindo de volta");
 			}
 		} catch (error) {
-			alert(error.message);
+			console.log(error.message);
 		}
+	};
+
+	const handleShowAlert = (show = false, msg = "", type = "") => {
+		setAlert({ show, msg, type });
 	};
 
 	const handleNewExam = async (e) => {
@@ -107,6 +117,7 @@ const AppProvider = ({ children }) => {
 				examType,
 				status,
 				price,
+				alert,
 				setName,
 				setEmail,
 				setPassword,
@@ -122,6 +133,7 @@ const AppProvider = ({ children }) => {
 				handleAdminSignup,
 				handleAdminSignout,
 				handleNewExam,
+				handleShowAlert,
 			}}
 		>
 			{children}

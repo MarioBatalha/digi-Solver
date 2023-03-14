@@ -16,11 +16,15 @@ const AppProvider = ({ children }) => {
 	const [examType, setExamType] = useState();
 	const [status, setStatus] = useState();
 	const [price, setPrice] = useState();
+	const [alert, setAlert] = useState({ show: false, msg: "", type: "" });
 
 	const { navigate } = useNavigation();
 
 	const handlePatientSignin = async () => {
 		try {
+			if (!email || !password) {
+				handleShowAlert(true, "Por favor, preencha os campos", "danger");
+			}
 			const response = await axios.post(
 				"http://localhost:3333/patient/signin",
 				{
@@ -37,6 +41,10 @@ const AppProvider = ({ children }) => {
 		} catch (error) {
 			alert(error.message);
 		}
+	};
+
+	const handleShowAlert = (show = false, msg = "", type = "") => {
+		setAlert({ show, msg, type });
 	};
 
 	const handlePatientSignup = async () => {
@@ -188,6 +196,7 @@ const AppProvider = ({ children }) => {
 				examType,
 				status,
 				price,
+				alert,
 				setName,
 				setEmail,
 				setPassword,
@@ -206,6 +215,7 @@ const AppProvider = ({ children }) => {
 				handleBloodTestRequest,
 				handlePrescriptionRequest,
 				handleColonExamRequest,
+				handleShowAlert,
 			}}
 		>
 			{children}

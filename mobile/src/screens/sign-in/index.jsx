@@ -13,10 +13,18 @@ import { styles } from "../../../style";
 
 import Logo from "../../assets/img/digisolve-logo.png";
 import { useGlobalContext } from "../../contexts";
+import { AlertComponent } from "../../components/Alert";
 
 export const SignIn = () => {
-	const { email, password, setEmail, setPassword, handlePatientSignin } =
-		useGlobalContext();
+	const {
+		email,
+		password,
+		alert,
+		handleShowAlert,
+		setEmail,
+		setPassword,
+		handlePatientSignin,
+	} = useGlobalContext();
 	const { navigate } = useNavigation();
 
 	return (
@@ -27,6 +35,10 @@ export const SignIn = () => {
 				Entre e peça novos exames ou receitas.
 			</Text>
 			<View style={styles.signinContainer}>
+				{alert.show && (
+					<AlertComponent {...alert} removeAlert={handleShowAlert} />
+				)}
+
 				<TextInput
 					placeholder="Email"
 					value={email}

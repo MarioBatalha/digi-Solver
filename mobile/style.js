@@ -903,4 +903,26 @@ export const styles = StyleSheet.create({
 		marginRight: 5,
 		color: "#FFF",
 	},
+
+	alert: {
+		marginBottom: 10,
+		padding: 10,
+		height: 10.25,
+		display: "flex",
+		alignItems: "center",
+		textAlign: "center",
+		fontSize: 10.7,
+		borderRadius: 10.25,
+		textTransform: "capitalize",
+	},
+
+	danger: {
+		color: "#721c24",
+		background: "#f8d7da",
+	},
+
+	success: {
+		color: "#155724",
+		background: "#d4edda",
+	},
 });

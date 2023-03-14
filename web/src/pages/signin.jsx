@@ -1,9 +1,16 @@
 import DoctorImg from "./../assets/doctor.jpg";
 import { useGlobalContext } from "../context";
-
+import { Alert } from "../components/alert";
 export function Signin() {
-	const { email, password, setEmail, setPassword, handleAdminSignin } =
-		useGlobalContext();
+	const {
+		email,
+		password,
+		alert,
+		handleShowAlert,
+		setEmail,
+		setPassword,
+		handleAdminSignin,
+	} = useGlobalContext();
 
 	return (
 		<main>
@@ -19,6 +26,7 @@ export function Signin() {
 					<p>Porque a sua saúde começa em sua casa, levamos até si.</p>
 				</div>
 				<div className="container">
+					{alert.show && <Alert {...alert} removeAlert={handleShowAlert} />}
 					<form onSubmit={handleAdminSignin}>
 						<div className="input-box">
 							<label htmlFor="email" className="user-details">
