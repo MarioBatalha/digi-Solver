@@ -72,7 +72,8 @@ const adminSchema = new mongoose.Schema({
 
 	email: {
 		type: String,
-		riquered: true,
+		required: true,
+		unique: [true, "Email Exist"],
 	},
 
 	password: {
@@ -99,6 +100,7 @@ const patientSchema = new mongoose.Schema({
 	email: {
 		type: String,
 		required: true,
+		unique: [true, "Email Exist"],
 	},
 
 	password: {

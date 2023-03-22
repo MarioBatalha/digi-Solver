@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 
 const AppContext = createContext();
 const AppProvider = ({ children }) => {
@@ -12,66 +11,15 @@ const AppProvider = ({ children }) => {
 	const [age, setAge] = useState("");
 	const [phone, setPhone] = useState("");
 	const [warning, setWarning] = useState("");
-	const [admin, setAdmin] = useState([]);
 	const [examType, setExamType] = useState();
 	const [status, setStatus] = useState();
 	const [price, setPrice] = useState();
 	const [isLogin, setIsLogin] = useState(false);
 	const [alert, setAlert] = useState({ show: false, msg: "", type: "" });
-
-	const handleAdminSignin = async (e, navigation) => {
-		e.preventDefault();
-		try {
-			if (!email || !password) {
-				handleShowAlert(true, "Por favor, preencha os campos", "danger");
-			}
-			const response = await axios.post("http://localhost:3333/admin/signin", {
-				email,
-				password,
-			});
-
-			const userData = await response.json();
-			setAdmin(userData);
-			setIsLogin(true);
-
-			if (!isLogin) {
-				setIsLogin(true);
-				console.log("Bem-vindo de volta");
-			}
-		} catch (error) {
-			console.log(error.message);
-		}
-	};
+	const [exams, setExams] = useState([]);
 
 	const handleShowAlert = (show = false, msg = "", type = "") => {
 		setAlert({ show, msg, type });
-	};
-
-	const handleNewExam = async (e) => {
-		e.preventDefault();
-		const testData = {
-			name,
-			email,
-			weight,
-			height,
-			age,
-			phone,
-			warning,
-			examType,
-			status,
-			price,
-		};
-		try {
-			const response = await axios.post(
-				"http://localhost:3333/exam/request",
-				testData
-			);
-
-			console.log("Exam request was successful");
-			setUser(response);
-		} catch (error) {
-			console.log("Exam request: ", error);
-		}
 	};
 
 	const handleAdminSignup = async () => {
@@ -98,11 +46,6 @@ const AppProvider = ({ children }) => {
 		}
 	};
 
-	const handleAdminSignout = async () => {
-		setName("");
-		setEmail("");
-		setPassword("");
-	};
 	return (
 		<AppContext.Provider
 			value={{
@@ -118,6 +61,8 @@ const AppProvider = ({ children }) => {
 				status,
 				price,
 				alert,
+				exams,
+				setExams,
 				setName,
 				setEmail,
 				setPassword,
@@ -129,10 +74,8 @@ const AppProvider = ({ children }) => {
 				setExamType,
 				setPrice,
 				setStatus,
-				handleAdminSignin,
-				handleAdminSignup,
-				handleAdminSignout,
-				handleNewExam,
+				isLogin,
+				setIsLogin,
 				handleShowAlert,
 			}}
 		>

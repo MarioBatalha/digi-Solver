@@ -1,120 +1,122 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { FiEdit, FiPower } from "react-icons/fi";
+import { FiEdit } from "react-icons/fi";
+import { FaSignOutAlt } from "react-icons/fa";
 import Logo from "../assets/digisolve-logo.png";
-
+import { useGlobalContext } from "../context/index";
+import { useNavigate } from "react-router";
+import axios from "axios";
 export function Dashboard() {
+	const {
+		name,
+		email,
+		password,
+		weight,
+		height,
+		age,
+		phone,
+		warning,
+		examType,
+		status,
+		price,
+		exams,
+		setExams,
+		setEmail,
+		setName,
+		setPassword,
+	} = useGlobalContext();
+
+	const navigate = useNavigate();
+
+	const handleGetData = async () => {
+		try {
+			const dataExam = await axios.get("http://localhost:3333/exam");
+			const { data } = dataExam;
+			const allExam = JSON.stringify(data);
+			setExams(allExam);
+			console.log(allExam);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	const handleAdminSignout = async () => {
+		setName("");
+		setEmail("");
+		setPassword("");
+		navigate("/");
+	};
+
+	useEffect(() => {
+		axios.get("http://localhost:3333/exam").then((response) => {
+			setExams(response.data);
+		});
+	}, []);
+
 	return (
 		<div className="profile-container">
 			<header>
 				<img src={Logo} alt="Be The Hero" />
-				<span>Bem-vindo/a de volta, Lissandro Afonso</span>
+				<span>Bem-vindo/a de volta, {email}</span>
 
 				<Link to="/exam/new" className="back-link">
 					Adicionar exame
 				</Link>
 
-				<button type="button">
-					<FiPower size={18} color="#05445e" />
+				<button type="button" onClick={handleAdminSignout}>
+					<FaSignOutAlt size={18} color="#05445e" />
 				</button>
 			</header>
 
 			<h1> Pedido de exames médicos</h1>
 
 			<ul>
-				<li>
-					<strong>Nome: Paulo Bizerra</strong>
-					<p></p>
+				{exams.map((exam) => {
+					const {
+						_id,
+						name,
+						height,
+						weight,
+						age,
+						createdAt,
+						status,
+						price,
+						warning,
+						examType,
+					} = exam;
+					return (
+						<li key={_id}>
+							<strong>Nome: {name}</strong>
+							<p></p>
 
-					<strong>Altura: 1.67</strong>
-					<p></p>
+							<strong>Altura: {height}</strong>
+							<p></p>
 
-					<strong>Peso: 70</strong>
-					<p></p>
-					<strong>Idade: 26</strong>
-					<p></p>
+							<strong>Peso: {weight}</strong>
+							<p></p>
+							<strong>Idade: {age}</strong>
+							<p></p>
 
-					<strong>Data do pedido: 12/02/2023</strong>
-					<p></p>
+							<strong>Data do pedido: {createdAt}</strong>
+							<p></p>
 
-					<strong>Status: Pendente</strong>
-					<p></p>
-					<strong>Tipo de exame: Exame de sangue</strong>
-					<p></p>
+							<strong>Status: {status}</strong>
+							<p></p>
+							<strong>Tipo de exame: {examType}</strong>
+							<p></p>
 
-					<strong>Valor pago: 25.000</strong>
-					<p></p>
+							<strong>Valor pago: {price} AOA</strong>
+							<p></p>
 
-					<strong>Advertencia: Alérgico a productos derivados de porco</strong>
-					<p></p>
+							<strong>Advertencia: {warning}</strong>
+							<p></p>
 
-					<button type="button">
-						<FiEdit size={20} color="#05445e" />
-					</button>
-				</li>
-
-				<li>
-					<strong>Nome: Ricardo Rafael</strong>
-					<p></p>
-
-					<strong>Altura: 1.60</strong>
-					<p></p>
-
-					<strong>Peso: 60</strong>
-					<p></p>
-					<strong>Idade: 25</strong>
-					<p></p>
-
-					<strong>Data do pedido: 1/01/2023</strong>
-					<p></p>
-
-					<strong>Status: Concluído</strong>
-					<p></p>
-					<strong>Tipo de exame: Exame da prostáta</strong>
-					<p></p>
-
-					<strong>Valor pago: 50.000</strong>
-					<p></p>
-
-					<strong>Advertencia: </strong>
-					<p></p>
-
-					<button type="button">
-						<FiEdit size={20} color="#05445e" />
-					</button>
-				</li>
-				<li>
-					<strong>Nome: Dorivaldo Manuel</strong>
-					<p></p>
-
-					<strong>Altura: 1.75</strong>
-					<p></p>
-
-					<strong>Peso: 70</strong>
-					<p></p>
-					<strong>Idade: 22</strong>
-					<p></p>
-
-					<strong>Data do pedido: 2/02/2023</strong>
-					<p></p>
-
-					<strong>Status: Pendente</strong>
-					<p></p>
-					<strong>Tipo de exame: Exame de sangue</strong>
-					<p></p>
-
-					<strong>Valor pago: 22.000</strong>
-					<p></p>
-
-					<strong>
-						Advertencia: Intolerante a lactose e todos derivados de vaca
-					</strong>
-					<p></p>
-
-					<button type="button">
-						<FiEdit size={20} color="#05445e" />
-					</button>
-				</li>
+							<button type="button">
+								<FiEdit size={20} color="#05445e" />
+							</button>
+						</li>
+					);
+				})}
 			</ul>
 		</div>
 	);

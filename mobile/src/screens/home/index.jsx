@@ -183,7 +183,7 @@ export const Home = () => {
 					<TouchableOpacity
 						activeOpacity={0.7}
 						style={styles.menuItem}
-						onPress={() => navigate("Carrinho")}
+						onPress={() => navigate("Pagamento")}
 					>
 						<FontAwesome name="shopping-cart" size={35} color="#7D7D86" />
 					</TouchableOpacity>

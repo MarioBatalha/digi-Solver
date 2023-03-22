@@ -1,16 +1,42 @@
 import DoctorImg from "./../assets/doctor.jpg";
 import { useGlobalContext } from "../context";
 import { Alert } from "../components/alert";
-export function Signin() {
-	const {
-		email,
-		password,
-		alert,
-		handleShowAlert,
-		setEmail,
-		setPassword,
-		handleAdminSignin,
-	} = useGlobalContext();
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { Navigate } from "react-router-dom";
+export function Signin({ setAdmin }) {
+	const { email, password, alert, handleShowAlert, setEmail, setPassword } =
+		useGlobalContext();
+
+	const navigate = useNavigate();
+
+	const handleAdminSignin = async (e) => {
+		e.preventDefault();
+		navigate("/admin/dashboard");
+		try {
+			if (!email || !password) {
+				handleShowAlert(true, "Por favor, preencha os campos", "danger");
+			}
+
+			if (email && password) {
+				const response = await axios.post(
+					"http://localhost:3333/admin/signin",
+					{
+						email,
+						password,
+					}
+				);
+
+				const adminData = await response.json();
+				console.log(adminData);
+				setAdmin(adminData);
+				setIsLogin(true);
+				alert("Clicked");
+			}
+		} catch (error) {
+			console.log(error.message);
+		}
+	};
 
 	return (
 		<main>
@@ -65,7 +91,7 @@ export function Signin() {
 							</div>
 
 							<div className="input-box">
-								<button type="submit ">Login</button>
+								<button type="submit">Login</button>
 								<label htmlFor="have_acount ">
 									Não tenho uma conta? <a href="#">Crie uma!</a>
 								</label>

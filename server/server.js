@@ -89,37 +89,27 @@ app.post("/admin/signin", async (req, res) => {
 
 //Manipulating exams
 app.post("/exam/request", async (req, res) => {
-	try {
-		const data = {
-			name: req.body.name,
-			email: req.body.email,
-			weight: req.body.weight,
-			height: req.body.height,
-			age: req.body.age,
-			phone: req.body.phone,
-			warning: req.body.warning,
-			examType: req.body.examType,
-			status: req.body.status,
-			price: req.body.price,
-		};
+	const data = {
+		name: req.body.name,
+		email: req.body.email,
+		weight: req.body.weight,
+		height: req.body.height,
+		age: req.body.age,
+		phone: req.body.phone,
+		warning: req.body.warning,
+		examType: req.body.examType,
+		status: req.body.status,
+		price: req.body.price,
+	};
 
+	try {
 		const checkPatient = await patient.findOne({
 			email: req.body.email,
-			name: req.body.name,
+			password: req.body.name,
 		});
-		if (
-			checkPatient.email === req.body.email &&
-			checkPatient.name === req.body.name &&
-			checkPatient.weight === req.body.weight &&
-			checkPatient.height === req.body.height &&
-			checkPatient.age === req.body.age
-		) {
-			await exam.insertMany([data]);
-			console.log("welcome back", req.body.email);
-		} else {
-			res.send("email is wrong or not valid");
-		}
 
+		await exam.insertMany([data]);
+		res.status(200).json(checkPatient);
 		console.log("exam added successfully");
 	} catch (err) {
 		console.error("Error creating exam", err);
@@ -135,9 +125,9 @@ app.post("/exam/update", async (req, res) => {
 
 app.get("/exam", async (req, res) => {
 	try {
-		const allExam = exam.find();
-		console.log(allExam);
+		const data = await exam.find();
+		res.json(data);
 	} catch (error) {
-		console.log("Error updating exam", error);
+		console.log("Error getting exam", error);
 	}
 });

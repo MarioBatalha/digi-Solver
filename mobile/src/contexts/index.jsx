@@ -48,6 +48,7 @@ const AppProvider = ({ children }) => {
 	};
 
 	const handlePatientSignup = async () => {
+		navigate("/Sign in");
 		try {
 			const response = await axios.post(
 				"http://localhost:3333/patient/signup",

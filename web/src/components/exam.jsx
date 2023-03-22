@@ -1,8 +1,9 @@
 import Logo from "../assets/digisolve-logo.png";
 import { Link } from "react-router-dom";
 import { FiArrowLeft } from "react-icons/fi";
-
 import { useGlobalContext } from "../context";
+import { useNavigate } from "react-router";
+import axios from "axios";
 export function Exam() {
 	const {
 		name,
@@ -25,8 +26,38 @@ export function Exam() {
 		setExamType,
 		setStatus,
 		setPrice,
-		handleNewExam,
 	} = useGlobalContext();
+
+	const navigate = useNavigate();
+
+	const handleNewExam = async (e) => {
+		e.preventDefault();
+		navigate(-1);
+		navigate("admin/dashboard");
+		const testData = {
+			name,
+			email,
+			weight,
+			height,
+			age,
+			phone,
+			warning,
+			examType,
+			status,
+			price,
+		};
+		try {
+			const response = await axios.post(
+				"http://localhost:3333/exam/request",
+				testData
+			);
+
+			console.log("Exam request was successful");
+			setUser(response);
+		} catch (error) {
+			console.log("Exam request: ", error);
+		}
+	};
 
 	return (
 		<div className="new-incident-container">
