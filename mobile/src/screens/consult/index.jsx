@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TouchableOpacity, Platform } from "react-native";
+import { View, Text, TouchableOpacity, Platform, Alert } from "react-native";
 import CalendarPicker from "react-native-calendar-picker";
 import { styles } from "../../../style";
+import { useNavigation } from "@react-navigation/native";
 
 export const Consult = () => {
 	const [selectDate, setSelectDate] = useState([]);
 	const startDate = selectDate ? selectDate.toString() : "";
 
+	const { navigate } = useNavigation();
+
 	const handleChangeDate = (date) => {
-		setSelectDate((prevDate) => [date]);
+		setSelectDate((prevDate) => date);
 	};
 
 	const handleScheduleConsult = () => {
 		Alert.alert("consulta agendada");
+		navigate("Home");
 	};
 	return (
 		<View style={styles.consultContainer}>
