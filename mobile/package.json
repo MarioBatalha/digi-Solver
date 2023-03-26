@@ -36,6 +36,7 @@
     "react": "18.1.0",
     "react-dom": "^18.1.0",
     "react-native": "0.70.5",
+    "react-native-calendar-picker": "^7.1.4",
     "react-native-credit-card-input": "^0.4.1",
     "react-native-credit-card-input-plus": "^0.4.5",
     "react-native-document-picker": "^8.1.3",
