@@ -1,10 +1,9 @@
 import DoctorImg from "./../assets/doctor.jpg";
 import { useGlobalContext } from "../context";
 import { Alert } from "../components/alert";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { Navigate } from "react-router-dom";
-export function Signin({ setAdmin }) {
+import { api } from "../utils/api";
+import { useNavigate } from "react-router";
+export function Signin() {
 	const { email, password, alert, handleShowAlert, setEmail, setPassword } =
 		useGlobalContext();
 
@@ -12,29 +11,28 @@ export function Signin({ setAdmin }) {
 
 	const handleAdminSignin = async (e) => {
 		e.preventDefault();
-		navigate("/admin/dashboard");
 		try {
 			if (!email || !password) {
 				handleShowAlert(true, "Por favor, preencha os campos", "danger");
-			}
-
-			if (email && password) {
-				const response = await axios.post(
-					"http://localhost:3333/admin/signin",
-					{
-						email,
-						password,
-					}
+			} else {
+				handleShowAlert(
+					true,
+					"o administrador não existe. contacte o suporte ",
+					"danger"
 				);
-
-				const adminData = await response.json();
-				console.log(adminData);
-				setAdmin(adminData);
-				setIsLogin(true);
-				alert("Clicked");
+			}
+			if (email && password) {
+				const response = await api.post(`admin/signin`, {
+					email,
+					password,
+				});
+				if (response.data) {
+					handleShowAlert(true, "Bem-vindo de volta!", "success");
+					navigate("admin/dashboard");
+				}
 			}
 		} catch (error) {
-			console.log(error.message);
+			console.log("Falha no login, tente novamente.");
 		}
 	};
 

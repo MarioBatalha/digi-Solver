@@ -11,6 +11,7 @@ const AppProvider = ({ children }) => {
 	const [age, setAge] = useState("");
 	const [phone, setPhone] = useState("");
 	const [warning, setWarning] = useState("");
+	const [title, setTitle] = useState("");
 	const [examType, setExamType] = useState();
 	const [status, setStatus] = useState();
 	const [price, setPrice] = useState();
@@ -62,6 +63,8 @@ const AppProvider = ({ children }) => {
 				price,
 				alert,
 				exams,
+				title,
+				setTitle,
 				setExams,
 				setName,
 				setEmail,

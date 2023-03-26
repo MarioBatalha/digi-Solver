@@ -1,10 +1,9 @@
 import express, { json } from "express";
-import path from "path";
-import hbs from "hbs";
 import { patient } from "./mongodb.js";
 import { admin } from "./mongodb.js";
 import { exam } from "./mongodb.js";
-import { request } from "http";
+
+import { test } from "./mongodb.js";
 import cors from "cors";
 //const templatePath = path.join(__dirname, "./src/templates");
 
@@ -75,10 +74,17 @@ app.post("/admin/signup", async (req, res) => {
 
 app.post("/admin/signin", async (req, res) => {
 	try {
-		const checkAdmin = await admin.findOne({ email: req.body.email });
+		const checkAdmin = await admin.findOne({
+			email: req.body.email,
+			password: req.body.password,
+		});
 
-		if (checkAdmin.password === req.body.password) {
+		if (
+			checkAdmin.email === req.body.email &&
+			checkAdmin.password === req.body.password
+		) {
 			console.log("welcome back", req.body.email);
+			res.send(checkAdmin);
 		} else {
 			res.send("wrong password or email address");
 		}
@@ -129,5 +135,21 @@ app.get("/exam", async (req, res) => {
 		res.json(data);
 	} catch (error) {
 		console.log("Error getting exam", error);
+	}
+});
+
+app.post("/test", async (req, res) => {
+	const data = {
+		title: req.body.title,
+		status: req.body.status,
+		price: req.body.price,
+	};
+
+	try {
+		await test.insertMany([data]);
+		res.status(200);
+		console.log("test added successfully");
+	} catch (err) {
+		console.error("Error creating test", err);
 	}
 });

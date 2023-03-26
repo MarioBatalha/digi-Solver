@@ -10,20 +10,27 @@ import { ProtectedRoute } from "./components/protectedRoute";
 import { useGlobalContext } from "./context";
 
 export function App() {
-	const [admin, setAdmin] = useState(null);
+	const { email, password } = useGlobalContext();
 	return (
 		<BrowserRouter>
 			<Routes>
-				<Route path="/" element={<Signin setAdmin={setAdmin} />} />
+				<Route path="/" element={<Signin />} />
 				<Route
 					path="admin/dashboard"
 					element={
-						//<ProtectedRoute email={admin?.email} password={admin?.password}>
-						<Dashboard email={admin?.email} password={admin?.password} />
-						//</ProtectedRoute>
+						<ProtectedRoute adminEmail={email} adminPassword={password}>
+							<Dashboard adminEmail={email} adminPassword={password} />
+						</ProtectedRoute>
 					}
 				/>
-				<Route path="exam/new" element={<Exam />} />
+				<Route
+					path="exam/new"
+					element={
+						<ProtectedRoute adminEmail={email} adminPassword={password}>
+							<Exam adminEmail={email} adminPassword={password} />
+						</ProtectedRoute>
+					}
+				/>
 				<Route path="*" element={<Error />} />
 			</Routes>
 		</BrowserRouter>

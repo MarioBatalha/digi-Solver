@@ -6,7 +6,9 @@ import Logo from "../assets/digisolve-logo.png";
 import { useGlobalContext } from "../context/index";
 import { useNavigate } from "react-router";
 import axios from "axios";
-export function Dashboard() {
+import { api } from "../utils/api";
+import { Alert } from "../components/alert";
+export function Dashboard({ adminEmail, adminPassword }) {
 	const {
 		name,
 		email,
@@ -24,19 +26,24 @@ export function Dashboard() {
 		setEmail,
 		setName,
 		setPassword,
+		alert,
+		handleShowAlert,
 	} = useGlobalContext();
 
 	const navigate = useNavigate();
 
 	const handleGetData = async () => {
 		try {
-			const dataExam = await axios.get("http://localhost:3333/exam");
-			const { data } = dataExam;
-			const allExam = JSON.stringify(data);
-			setExams(allExam);
-			console.log(allExam);
+			const allExams = await api.get("exam");
+			const { data } = allExams;
+			setExams(data);
+
+			if (!data) {
+				handleShowAlert(true, "Upsi, erro ao carregar dados");
+			}
 		} catch (error) {
-			console.log(error);
+			console.log(error.response);
+			handleShowAlert(true, "Upsi, erro ao carregar dados");
 		}
 	};
 
@@ -48,19 +55,17 @@ export function Dashboard() {
 	};
 
 	useEffect(() => {
-		axios.get("http://localhost:3333/exam").then((response) => {
-			setExams(response.data);
-		});
+		handleGetData();
 	}, []);
 
 	return (
 		<div className="profile-container">
 			<header>
 				<img src={Logo} alt="Be The Hero" />
-				<span>Bem-vindo/a de volta, {email}</span>
+				<span>Olá, {email}</span>
 
 				<Link to="/exam/new" className="back-link">
-					Adicionar exame
+					Adicionar teste
 				</Link>
 
 				<button type="button" onClick={handleAdminSignout}>
@@ -69,7 +74,7 @@ export function Dashboard() {
 			</header>
 
 			<h1> Pedido de exames médicos</h1>
-
+			{alert.show && <Alert {...alert} removeAlert={handleShowAlert} />}
 			<ul>
 				{exams.map((exam) => {
 					const {
