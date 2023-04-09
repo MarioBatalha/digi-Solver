@@ -14,18 +14,43 @@ import { styles } from "../../../style";
 import Logo from "../../assets/img/digisolve-logo.png";
 import { useGlobalContext } from "../../contexts";
 import { AlertComponent } from "../../components/Alert";
-
+import axios from "axios";
 export const SignIn = () => {
 	const {
 		email,
 		password,
+		name,
 		alert,
 		handleShowAlert,
 		setEmail,
 		setPassword,
-		handlePatientSignin,
 	} = useGlobalContext();
+
 	const { navigate } = useNavigation();
+
+	const handlePatientSignin = async () => {
+		Alert.alert(`Bem-vindo/a ${name}`);
+		navigate("Home");
+		try {
+			if (!email || !password) {
+				handleShowAlert(true, "Por favor, preencha os campos", "danger");
+			}
+
+			const response = await axios.post(
+				"http://localhost:3333/patient/signin",
+				{
+					email,
+					password,
+				}
+			);
+
+			const userData = await response.json();
+
+			setUser(userData);
+		} catch (error) {
+			alert(error.message);
+		}
+	};
 
 	return (
 		<View style={styles.signin}>

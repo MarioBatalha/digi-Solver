@@ -1,10 +1,17 @@
-import { useState } from "react";
-import { View, TextInput, Image, Text, TouchableOpacity } from "react-native";
+import {
+	View,
+	TextInput,
+	Image,
+	Text,
+	TouchableOpacity,
+	Alert,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import Logo from "../../assets/img/digisolve-logo.png";
 import { styles } from "../../../style";
 import { useGlobalContext } from "../../contexts";
+import axios from "axios";
 
 export const Register = () => {
 	const {
@@ -24,10 +31,33 @@ export const Register = () => {
 		setAge,
 		setPhone,
 		setWarning,
-		handlePatientSignup,
 	} = useGlobalContext();
-
 	const { navigate } = useNavigation();
+
+	const handlePatientSignup = async () => {
+		Alert.alert("Registro feito com sucesso");
+		navigate("Sign in");
+
+		try {
+			const response = await axios.post(
+				"http://localhost:3333/patient/signup",
+				{
+					name,
+					email,
+					password,
+					weight,
+					height,
+					age,
+					phone,
+					warning,
+				}
+			);
+
+			//	const result = await response.json();
+		} catch (error) {
+			console.log("sign up error: ", error);
+		}
+	};
 
 	return (
 		<View style={styles.registerLogin}>

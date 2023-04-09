@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import {
 	View,
 	Text,
@@ -5,7 +6,6 @@ import {
 	TouchableOpacity,
 	ScrollView,
 	TextInput,
-	Alert,
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
@@ -22,6 +22,7 @@ import Doctor from "../../assets/img/doctor-injection.png";
 import { useNavigation } from "@react-navigation/native";
 import { styles } from "../../../style";
 import { useGlobalContext } from "../../contexts";
+
 const SquareView = (props) => {
 	return (
 		<View
@@ -41,7 +42,9 @@ const SquareView = (props) => {
 export const Home = () => {
 	const {
 		email,
-		handleUserSignout,
+		setEmail,
+		setName,
+		setPassword,
 		handlePregnancyTestRequest,
 		handleBloodTestRequest,
 		handlePrescriptionRequest,
@@ -49,11 +52,22 @@ export const Home = () => {
 	} = useGlobalContext();
 	const { navigate } = useNavigation();
 
+	const handlePatientSignout = async () => {
+		try {
+			navigate("Principal");
+			setName("");
+			setEmail("");
+			setPassword("");
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	return (
 		<View style={styles.profileContainer}>
 			<View style={styles.profileContent}>
 				<Text style={styles.title}>Olá, {email}</Text>
-				<TouchableOpacity activeOpacity={0.7} onPress={handleUserSignout}>
+				<TouchableOpacity activeOpacity={0.7} onPress={handlePatientSignout}>
 					<FontAwesome name="sign-out" size={24} color="#189AB4" />
 				</TouchableOpacity>
 			</View>

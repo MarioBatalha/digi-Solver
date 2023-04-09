@@ -1,8 +1,5 @@
 import React, { createContext, useContext, useState } from "react";
-import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
-import { Alert } from "react-native";
-
 const AppContext = createContext();
 const AppProvider = ({ children }) => {
 	const [name, setName] = useState("");
@@ -18,66 +15,8 @@ const AppProvider = ({ children }) => {
 	const [price, setPrice] = useState();
 	const [alert, setAlert] = useState({ show: false, msg: "", type: "" });
 
-	const { navigate } = useNavigation();
-
-	const handlePatientSignin = async () => {
-		try {
-			if (!email || !password) {
-				handleShowAlert(true, "Por favor, preencha os campos", "danger");
-			}
-			const response = await axios.post(
-				"http://localhost:3333/patient/signin",
-				{
-					email,
-					password,
-				}
-			);
-
-			console.log(response);
-
-			const userData = await response.json();
-			navigate("Home");
-			setUser(userData);
-		} catch (error) {
-			alert(error.message);
-		}
-	};
-
 	const handleShowAlert = (show = false, msg = "", type = "") => {
 		setAlert({ show, msg, type });
-	};
-
-	const handlePatientSignup = async () => {
-		navigate("/Sign in");
-		try {
-			const response = await axios.post(
-				"http://localhost:3333/patient/signup",
-				{
-					name,
-					email,
-					password,
-					weight,
-					height,
-					age,
-					phone,
-					warning,
-				}
-			);
-
-			const result = await response.json();
-
-			console.log("register success");
-			Alert.alert("Registro feito com sucesso");
-			navigate("Sign in");
-		} catch (error) {
-			console.log("sign up error: ", error);
-		}
-	};
-
-	const handlePatientSignout = async () => {
-		setName("");
-		setEmail("");
-		setPassword("");
 	};
 
 	const handleBloodTestRequest = async () => {
@@ -209,9 +148,6 @@ const AppProvider = ({ children }) => {
 				setExamType,
 				setPrice,
 				setStatus,
-				handlePatientSignin,
-				handlePatientSignup,
-				handlePatientSignout,
 				handlePregnancyTestRequest,
 				handleBloodTestRequest,
 				handlePrescriptionRequest,
