@@ -19,109 +19,6 @@ const AppProvider = ({ children }) => {
 		setAlert({ show, msg, type });
 	};
 
-	const handleBloodTestRequest = async () => {
-		const testData = {
-			name,
-			email,
-			weight,
-			height,
-			age,
-			phone,
-			warning,
-			examType: "Teste de sangue",
-			status: "Pendente",
-			price: 50000.0,
-		};
-		try {
-			const response = await axios.post(
-				"http://localhost:3333/exam/request",
-				testData
-			);
-
-			console.log("blood test request was successful");
-			setUser(response);
-		} catch (error) {
-			console.log("blood test request: ", error);
-		}
-	};
-
-	const handlePregnancyTestRequest = async () => {
-		const testData = {
-			name,
-			email,
-			weight,
-			height,
-			age,
-			phone,
-			warning,
-			examType: "Teste de grávidez",
-			status: "Pendente",
-			price: 22000.0,
-		};
-		try {
-			const response = await axios.post(
-				"http://localhost:3333/exam/request",
-				testData
-			);
-
-			console.log("pregnancy test request was successful");
-			setUser(response);
-		} catch (error) {
-			console.log("pregnancy test request: ", error);
-		}
-	};
-
-	const handlePrescriptionRequest = async () => {
-		const testData = {
-			name,
-			email,
-			weight,
-			height,
-			age,
-			phone,
-			warning,
-			examType: "Receita",
-			status: "Pendente",
-			price: 50000.0,
-		};
-		try {
-			const response = await axios.post(
-				"http://localhost:3333/exam/request",
-				testData
-			);
-
-			console.log("prescription request was successful");
-			setUser(response);
-		} catch (error) {
-			console.log("prescription test request: ", error);
-		}
-	};
-
-	const handleColonExamRequest = async () => {
-		const testData = {
-			name,
-			email,
-			weight,
-			height,
-			age,
-			phone,
-			warning,
-			examType: "Exame do colón",
-			status: "Pendente",
-			price: 70000.0,
-		};
-		try {
-			const response = await axios.post(
-				"http://localhost:3333/exam/request",
-				testData
-			);
-
-			console.log("colon exam request was successful");
-			setUser(response);
-		} catch (error) {
-			console.log("colon exam request: ", error);
-		}
-	};
 	return (
 		<AppContext.Provider
 			value={{
@@ -148,10 +45,6 @@ const AppProvider = ({ children }) => {
 				setExamType,
 				setPrice,
 				setStatus,
-				handlePregnancyTestRequest,
-				handleBloodTestRequest,
-				handlePrescriptionRequest,
-				handleColonExamRequest,
 				handleShowAlert,
 			}}
 		>

@@ -124,8 +124,11 @@ app.post("/exam/request", async (req, res) => {
 
 app.post("/exam/update", async (req, res) => {
 	try {
+		const result = await patient.findOne({ _id: new ObjectId(id) });
+		return result;
 	} catch (error) {
 		console.log("Error updating exam", error);
+		res.status(404).send("Example not found");
 	}
 });
 

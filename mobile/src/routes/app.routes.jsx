@@ -13,6 +13,7 @@ import { Notification } from "../screens/notification";
 import { SignIn } from "../screens/sign-in";
 import { Register } from "../screens/register";
 import { Payment } from "../screens/payment";
+import { PrePayment } from "../screens/pre-payment";
 const { Navigator, Screen } = createNativeStackNavigator();
 export const AppRoutes = () => {
 	return (
@@ -30,6 +31,7 @@ export const AppRoutes = () => {
 			<Screen name="Carrinho" component={ShopCart} />
 			<Screen name="Notificações" component={Notification} />
 			<Screen name="Pagamento" component={Payment} />
+			<Screen name="Info exame" component={PrePayment} />
 		</Navigator>
 	);
 };

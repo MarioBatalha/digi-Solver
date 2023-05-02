@@ -6,6 +6,7 @@ import {
 	TouchableOpacity,
 	ScrollView,
 	TextInput,
+	Alert,
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
@@ -22,6 +23,7 @@ import Doctor from "../../assets/img/doctor-injection.png";
 import { useNavigation } from "@react-navigation/native";
 import { styles } from "../../../style";
 import { useGlobalContext } from "../../contexts";
+import { AlertComponent } from "../../components/Alert";
 
 const SquareView = (props) => {
 	return (
@@ -40,17 +42,127 @@ const SquareView = (props) => {
 };
 
 export const Home = () => {
-	const {
-		email,
-		setEmail,
-		setName,
-		setPassword,
-		handlePregnancyTestRequest,
-		handleBloodTestRequest,
-		handlePrescriptionRequest,
-		handleColonExamRequest,
-	} = useGlobalContext();
+	const { email, setEmail, setName, setPassword, alert, handleShowAlert } =
+		useGlobalContext();
 	const { navigate } = useNavigation();
+
+	const handleBloodTestRequest = async () => {
+		handleShowAlert(true, "Test solicitado", "success");
+		navigate("Info exame");
+		const testData = {
+			name,
+			email,
+			weight,
+			height,
+			age,
+			phone,
+			warning,
+			examType: "Teste de sangue",
+			status: "Pendente",
+			price: 50000.0,
+		};
+
+		try {
+			const response = await axios.post(
+				"http://localhost:3333/exam/request",
+				testData
+			);
+			console.log("blood test request was successful");
+			setUser(response);
+		} catch (error) {
+			console.log("blood test request: ", error);
+		}
+	};
+
+	const handlePregnancyTestRequest = async () => {
+		handleShowAlert(true, "Test solicitado", "success");
+		navigate("Info exame");
+
+		const testData = {
+			name,
+			email,
+			weight,
+			height,
+			age,
+			phone,
+			warning,
+			examType: "Teste de grávidez",
+			status: "Pendente",
+			price: 22000.0,
+		};
+
+		try {
+			const response = await axios.post(
+				"http://localhost:3333/exam/request",
+				testData
+			);
+
+			console.log("pregnancy test request was successful");
+			setUser(response);
+		} catch (error) {
+			console.log("pregnancy test request: ", error);
+		}
+	};
+
+	const handlePrescriptionRequest = async () => {
+		handleShowAlert(true, "Test solicitado", "success");
+		navigate("Info exame");
+
+		const testData = {
+			name,
+			email,
+			weight,
+			height,
+			age,
+			phone,
+			warning,
+			examType: "Receita",
+			status: "Pendente",
+			price: 50000.0,
+		};
+
+		try {
+			const response = await axios.post(
+				"http://localhost:3333/exam/request",
+				testData
+			);
+
+			console.log("prescription request was successful");
+			setUser(response);
+		} catch (error) {
+			console.log("prescription test request: ", error);
+		}
+	};
+
+	const handleColonExamRequest = async () => {
+		handleShowAlert(true, "Test solicitado", "success");
+		navigate("Info exame");
+
+		const testData = {
+			name,
+			email,
+			weight,
+			height,
+			age,
+			phone,
+			warning,
+			examType: "Exame do colón",
+			status: "Pendente",
+			price: 70000.0,
+		};
+
+		try {
+			const response = await axios.post(
+				"http://localhost:3333/exam/request",
+				testData
+			);
+
+			console.log("colon exam request was successful");
+			setUser(response);
+		} catch (error) {
+			console.log("colon exam request: ", error);
+		}
+	};
 
 	const handlePatientSignout = async () => {
 		try {
@@ -67,6 +179,11 @@ export const Home = () => {
 		<View style={styles.profileContainer}>
 			<View style={styles.profileContent}>
 				<Text style={styles.title}>Olá, {email}</Text>
+				<View>
+					{alert.show && (
+						<AlertComponent {...alert} removeAlert={handleShowAlert} />
+					)}
+				</View>
 				<TouchableOpacity activeOpacity={0.7} onPress={handlePatientSignout}>
 					<FontAwesome name="sign-out" size={24} color="#189AB4" />
 				</TouchableOpacity>

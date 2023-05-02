@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { FiEdit } from "react-icons/fi";
+import { FiEdit, FiSave } from "react-icons/fi";
 import { FaSignOutAlt } from "react-icons/fa";
 import Logo from "../assets/digisolve-logo.png";
 import { useGlobalContext } from "../context/index";
@@ -22,6 +22,7 @@ export function Dashboard({ adminEmail, adminPassword }) {
 		status,
 		price,
 		exams,
+		setStatus,
 		setExams,
 		setEmail,
 		setName,
@@ -29,6 +30,8 @@ export function Dashboard({ adminEmail, adminPassword }) {
 		alert,
 		handleShowAlert,
 	} = useGlobalContext();
+
+	const [isEditing, setIsEditing] = useState(false);
 
 	const navigate = useNavigate();
 
@@ -52,6 +55,24 @@ export function Dashboard({ adminEmail, adminPassword }) {
 		setEmail("");
 		setPassword("");
 		navigate("/");
+	};
+
+	const handleEdit = () => {
+		setIsEditing(true);
+	};
+
+	const handleUpdateStatus = async () => {
+		setIsEditing(false);
+		const filter = { _id: ObjectId("6418790401209f704c4d62d8") };
+
+		const updateStatus = {
+			$set: {
+				status: "concluído",
+			},
+		};
+
+		//const result = await api.post("/exam/update:_id");
+		console.log(result);
 	};
 
 	useEffect(() => {
@@ -105,7 +126,21 @@ export function Dashboard({ adminEmail, adminPassword }) {
 							<strong>Data do pedido: {createdAt}</strong>
 							<p></p>
 
-							<strong>Status: {status}</strong>
+							{isEditing ? (
+								<>
+									<select
+										value={status}
+										onChange={(e) => setStatus(e.target.value)}
+									>
+										<option value="pendente">Pendente</option>
+										<option value="concluido">Concluído</option>
+										<option value="negado">Negado</option>
+									</select>
+								</>
+							) : (
+								<strong>Status: {status}</strong>
+							)}
+
 							<p></p>
 							<strong>Tipo de exame: {examType}</strong>
 							<p></p>
@@ -116,9 +151,15 @@ export function Dashboard({ adminEmail, adminPassword }) {
 							<strong>Advertencia: {warning}</strong>
 							<p></p>
 
-							<button type="button">
-								<FiEdit size={20} color="#05445e" />
-							</button>
+							{isEditing ? (
+								<button type="button" onClick={handleUpdateStatus}>
+									<FiSave size={20} color="#05445e" />
+								</button>
+							) : (
+								<button type="button" onClick={handleEdit}>
+									<FiEdit size={20} color="#05445e" />
+								</button>
+							)}
 						</li>
 					);
 				})}

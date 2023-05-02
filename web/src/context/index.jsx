@@ -13,7 +13,7 @@ const AppProvider = ({ children }) => {
 	const [warning, setWarning] = useState("");
 	const [title, setTitle] = useState("");
 	const [examType, setExamType] = useState();
-	const [status, setStatus] = useState();
+	const [status, setStatus] = useState("Pendente");
 	const [price, setPrice] = useState();
 	const [isLogin, setIsLogin] = useState(false);
 	const [alert, setAlert] = useState({ show: false, msg: "", type: "" });
